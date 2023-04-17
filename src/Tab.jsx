@@ -8,7 +8,9 @@ export default function Tab(props) {
         outline: 0,
         borderBottom: "2px solid black",
         opacity: "1",
-        margin: "30px 0",
+        margin: "0",
+        height: "40px",
+        width: "200px",
       }
     : {
         cursor: "pointer",
@@ -17,7 +19,9 @@ export default function Tab(props) {
         borderBottom: "none",
         border: 0,
         outline: 0,
-        margin: "30px 0",
+        margin: "0",
+        height: "40px",
+        width: "200px",
       };
 
   return (

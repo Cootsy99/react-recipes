@@ -6,29 +6,36 @@ import Tab from "./Tab";
 export default function RecipesByCuisine({ api }) {
   //   let allCuisines;
 
-  const cuisines = ["Cuisine 1", "Cuisine 2", "Cuisine 3"];
-  const [active, setActive] = useState(cuisines[0]);
+  //   const cuisines = ["Cuisine 1", "Cuisine 2", "Cuisine 3"];
+  const [cuisineList, setCuisineList] = useState([]);
+  const [active, setActive] = useState([]);
 
   const cuisineListAddress = api.address + "/list.php?a=list";
 
-  async function retrieveCuisines() {
-    // allCuisines = api.fetcher(cuisineListAddress);
-    const allCuisines = await api.fetcher(cuisineListAddress);
-    const allCuisineList = allCuisines["meals"].map((cuisine) => {
-      return cuisine["strArea"];
-    });
-    return allCuisineList;
-    // console.log(allCuisineList);
-    // return cuisineList;
-    // console.log(allCuisines);
-  }
-  //   let myData;
-  async function myFunction() {
-    let myData = await retrieveCuisines();
-    return await myData;
-  }
+  //   async function retrieveCuisines() {
+  //     // allCuisines = api.fetcher(cuisineListAddress);
+  //     const allCuisines = await api.fetcher(cuisineListAddress);
+  //     const allCuisineList = allCuisines["meals"].map((cuisine) => {
+  //       return cuisine["strArea"];
+  //     });
+  //     setCuisineList(allCuisineList);
+  //     // setActive(cuisineList[0]);
+  //   }
 
-  //   useEffect(retrieveCuisines, []);
+  useEffect(() => {
+    api
+      .fetcher(cuisineListAddress)
+      .then((result) => {
+        return result["meals"].map((cuisine) => {
+          return cuisine["strArea"];
+        });
+      })
+      .then((output) => {
+        setCuisineList(output);
+        setActive(output[0]);
+      });
+  }, []);
+
   //   let store = retrieveCuisines();
   //   console.log(allCuisines);
 
@@ -41,7 +48,7 @@ export default function RecipesByCuisine({ api }) {
       <Search />
       <div>
         <div className="buttonTabs">
-          {cuisines.map((cuisine, index) => {
+          {cuisineList.map((cuisine, index) => {
             return (
               <Tab
                 key={index}
