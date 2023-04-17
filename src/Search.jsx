@@ -1,3 +1,7 @@
 export default function Search() {
-  return <div>This is my search bar</div>;
+  return (
+    <div>
+      <input placeholder="Search for recipes"></input>
+    </div>
+  );
 }

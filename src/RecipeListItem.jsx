@@ -1,3 +1,3 @@
-export default function RecipeListItem() {
-  return <div>This is my recipe list item component</div>;
+export default function RecipeListItem(props) {
+  return <div>{props.recipe}</div>;
 }

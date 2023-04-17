@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <div>
         <header>Favorite Recipes</header>
-        <RecipeList></RecipeList>
+        <RecipeList />
       </div>
     </>
   );

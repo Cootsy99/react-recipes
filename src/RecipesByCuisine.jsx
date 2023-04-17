@@ -1,3 +1,14 @@
+import RecipeList from "./RecipeList";
+import Search from "./Search";
+
 export default function RecipesByCuisine() {
-  return <div>This is my Recipe by Cuisine page</div>;
+  return (
+    <div>
+      <Search />
+      <div>
+        Cusinine 1 | Cuisine 2 |
+        <RecipeList />
+      </div>
+    </div>
+  );
 }

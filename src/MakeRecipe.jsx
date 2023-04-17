@@ -1,3 +1,12 @@
+import RecipeList from "./RecipeList";
+
 export default function MakeRecipe() {
-  return <div>This is my make recipe page</div>;
+  return (
+    <div>
+      Recipe Name Picture Ingredients
+      <RecipeList />
+      Method
+      <RecipeList />
+    </div>
+  );
 }
