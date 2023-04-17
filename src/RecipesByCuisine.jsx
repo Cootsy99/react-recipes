@@ -4,6 +4,10 @@ import { useEffect } from "react";
 
 export default function RecipesByCuisine({ api }) {
   //   let allCuisines;
+
+  const cuisines = ["Categor 1", "Category 2", "Category 3"];
+  const [active, setActive] = useState(categories[0]);
+
   const cuisineListAddress = api.address + "/list.php?a=list";
 
   async function retrieveCuisines() {
