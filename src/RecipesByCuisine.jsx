@@ -4,23 +4,10 @@ import { useEffect, useState } from "react";
 import Tab from "./Tab";
 
 export default function RecipesByCuisine({ api }) {
-  //   let allCuisines;
-
-  //   const cuisines = ["Cuisine 1", "Cuisine 2", "Cuisine 3"];
   const [cuisineList, setCuisineList] = useState([]);
   const [active, setActive] = useState([]);
 
   const cuisineListAddress = api.address + "/list.php?a=list";
-
-  //   async function retrieveCuisines() {
-  //     // allCuisines = api.fetcher(cuisineListAddress);
-  //     const allCuisines = await api.fetcher(cuisineListAddress);
-  //     const allCuisineList = allCuisines["meals"].map((cuisine) => {
-  //       return cuisine["strArea"];
-  //     });
-  //     setCuisineList(allCuisineList);
-  //     // setActive(cuisineList[0]);
-  //   }
 
   useEffect(() => {
     api
@@ -36,13 +23,6 @@ export default function RecipesByCuisine({ api }) {
       });
   }, []);
 
-  //   let store = retrieveCuisines();
-  //   console.log(allCuisines);
-
-  //   console.log(allCuisines);
-  //   console.log(api.cuisineList);
-  //   retrieveCuisines();
-
   return (
     <div>
       <Search />
@@ -54,14 +34,11 @@ export default function RecipesByCuisine({ api }) {
                 key={index}
                 active={active === cuisine}
                 setActive={setActive}
-                // onClick={() => setActive(category)}
                 category={cuisine}
               ></Tab>
             );
           })}
         </div>
-        {/* Cusinine 1 | Cuisine 2 | */}
-        {/* {myFunction()} */}
         <RecipeList />
       </div>
     </div>

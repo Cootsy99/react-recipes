@@ -52,7 +52,10 @@ function App() {
           path="/RecipesByCuisine"
           element={<RecipesByCuisine api={api} />}
         />
-        <Route path="/RecipesByCategory" element={<RecipesByCategory />} />
+        <Route
+          path="/RecipesByCategory"
+          element={<RecipesByCategory api={api} />}
+        />
         <Route path="/AddNewRecipes" element={<AddNewRecipes />} />
         <Route path="/ViewRecipe" element={<ViewRecipe />} />
         <Route path="/MakeRecipe" element={<MakeRecipe />} />
