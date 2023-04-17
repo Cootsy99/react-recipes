@@ -11,41 +11,48 @@ import MakeRecipe from "./MakeRecipe";
 import PageNotFound from "./PageNotFound";
 
 function App() {
-  const apiAddress = "www.themealdb.com/api/json/v1/1";
-  const arrabiataAddress = `${apiAddress}/search.php?s=Arrabiata`;
+  const api = {
+    address: "https://www.themealdb.com/api/json/v1/1",
+    fetcher: async function apiFetch(url) {
+      const result = await fetch(url);
+      const output = await result.json();
+      return output;
+    },
+    // cuisineListAddress: this.address + "/list.php?a=list",
+    // cuisineList: this.fetcher(this.cuisineListAddress),
 
-  async function apiFetch(url) {
-    const result = await fetch(url);
-    const output = await result.json();
     // console.log(output);
-  }
 
-  // apiFetch(arrabiataAddress);
+    arrabiata: "/search.php?s=Arrabiata",
+  };
+  // const apiAddress = "https://www.themealdb.com/api/json/v1/1";
+  // const arrabiataAddress = `${apiAddress}/search.php?s=Arrabiata`;
 
-  fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
-    .then((result) => result.json())
-    .then((output) => console.log(output));
-
-  // async function apiFetchAsync(url, elementToUpdate) {
+  // async function apiFetch(url) {
   //   const result = await fetch(url);
   //   const output = await result.json();
   //   console.log(output);
-  // elementToUpdate.setAttribute("src", output[0].url);
   // }
 
-  // const myAPIKey = `live_zFCXhNaj8NgM4yhZivUiTBrTdGmnl8KDDliRaTXuiT63AOvRDv03CJ4tjtV8ewSD`;
-  // const randomURL = `https://api.thecatapi.com/v1/images/search?api_key=${myAPIKey}}`;
-  // apiFetchAsync(randomURL);
+  api.fetcher(api.address + api.arrabiata);
+
+  // fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
+  //   .then((result) => result.json())
+  //   .then((output) => console.log(output));
 
   let myRecipes = {};
 
   return (
     <div className="App">
       <NavBar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/AllRecipes" element={<AllRecipes />} />
-        <Route path="/RecipesByCuisine" element={<RecipesByCuisine />} />
+        <Route
+          path="/RecipesByCuisine"
+          element={<RecipesByCuisine api={api} />}
+        />
         <Route path="/RecipesByCategory" element={<RecipesByCategory />} />
         <Route path="/AddNewRecipes" element={<AddNewRecipes />} />
         <Route path="/ViewRecipe" element={<ViewRecipe />} />
