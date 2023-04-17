@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeList from "./RecipeList";
 
 export default function Home({ myRecipes }) {
-  const [myRecipeList, setMyRecipeList] = useState(myRecipes);
+  //   const [myRecipeList, setMyRecipeList] = useState(myRecipes);
+  //   useEffect(() => {
+  //     console.log(myRecipes);
+  //     setMyRecipeList(myRecipes);
+  //   }, [myRecipes]);
 
   return (
     <>
@@ -22,9 +26,18 @@ export default function Home({ myRecipes }) {
         </Link>
       </div>
       <div>
-        {myRecipeList.map((item, index) => {
-          return <p key={index}>{item["strMeal"]}</p>;
-        })}
+        {myRecipes ? (
+          <>
+            {myRecipes.map((item, index) => {
+              //   console.log(item["strMeal"]);
+              // return <p>Working</p>;
+              return <p key={index}>{item["strMeal"]}</p>;
+            })}
+          </>
+        ) : (
+          //   <div>Loaded {myRecipes[5]["strMeal"]}</div>
+          <div>Waiting</div>
+        )}
       </div>
       <div>
         <header>Favorite Recipes</header>

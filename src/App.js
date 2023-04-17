@@ -12,7 +12,7 @@ import PageNotFound from "./PageNotFound";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [myRecipes, setMyRecipes] = useState(["test"]);
+  const [myRecipes, setMyRecipes] = useState(undefined);
 
   const api = {
     address: "https://www.themealdb.com/api/json/v1/1",
@@ -49,23 +49,19 @@ function App() {
   //       .then((output) => setMyRecipes({ ...myRecipes, output }));
   //   });
   // }
-
-  // initialise();
-
-  useEffect(function () {
-    // let calledRecipes = initialRecipes.forEach((recipe) => {
+  async function initialiser() {
     let fetchedRecipeArr = [];
-    // for (let i = 0; i < 10; i++) {
-    //   console.log(i);
-    // }
     for (const recipe of initialRecipes) {
-      api
-        .fetcher(api.address + api.search + recipe)
-        .then((result) => result["meals"][0])
-        .then((output) => fetchedRecipeArr.push(output));
-      // console.log(fetchedRecipeArr);
+      const result = await api.fetcher(api.address + api.search + recipe);
+      fetchedRecipeArr.push(result["meals"][0]);
     }
-    setMyRecipes(fetchedRecipeArr);
+    return fetchedRecipeArr;
+  }
+
+  useEffect(() => {
+    // let calledRecipes = initialRecipes.forEach((recipe) => {
+    initialiser().then((result) => setMyRecipes(result));
+
     //   const fetched = api.fetcher(api.address + api.search + recipe);
     //   const result = fetched["meals"][0];
     //   fetchedRecipeArr.push(result);
