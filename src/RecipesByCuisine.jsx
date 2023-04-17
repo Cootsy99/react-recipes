@@ -39,7 +39,7 @@ export default function RecipesByCuisine({ api }) {
             );
           })}
         </div>
-        <RecipeList />
+        <RecipeList active={active} />
       </div>
     </div>
   );
