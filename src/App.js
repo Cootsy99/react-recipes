@@ -12,7 +12,7 @@ import PageNotFound from "./PageNotFound";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [myRecipes, setMyRecipes] = useState([]);
+  const [myRecipes, setMyRecipes] = useState(["test"]);
 
   const api = {
     address: "https://www.themealdb.com/api/json/v1/1",
@@ -103,13 +103,9 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <div>
-        {/* {myRecipes.map((item) => (
-          <p>{item["strMeal"]}</p>
-        ))} */}
-      </div>
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home myRecipes={myRecipes} />} />
         <Route path="/AllRecipes" element={<AllRecipes />} />
         <Route
           path="/RecipesByCuisine"

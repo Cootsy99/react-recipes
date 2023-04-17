@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeList from "./RecipeList";
 
-export default function Home() {
+export default function Home({ myRecipes }) {
+  const [myRecipeList, setMyRecipeList] = useState(myRecipes);
+
   return (
     <>
       <div>
@@ -17,6 +20,11 @@ export default function Home() {
         <Link to="/AddNewRecipes">
           <button>Add New Recipes</button>
         </Link>
+      </div>
+      <div>
+        {myRecipeList.map((item, index) => {
+          return <p key={index}>{item["strMeal"]}</p>;
+        })}
       </div>
       <div>
         <header>Favorite Recipes</header>
