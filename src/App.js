@@ -14,33 +14,6 @@ import { useEffect, useState } from "react";
 function App() {
   const [myRecipes, setMyRecipes] = useState(undefined);
 
-  const api = {
-    address: "https://www.themealdb.com/api/json/v1/1",
-    fetcher: async function apiFetch(url) {
-      const result = await fetch(url);
-      const output = await result.json();
-      return output;
-    },
-    // cuisineListAddress: this.address + "/list.php?a=list",
-    // cuisineList: this.fetcher(this.cuisineListAddress),
-
-    // console.log(output);
-
-    search: "/search.php?s=",
-  };
-
-  const initialRecipes = [
-    "Arrabiata",
-    "Beef Wellington",
-    "Pancakes",
-    "Tarte Tatin",
-    "Timbits",
-    "Irish Stew",
-    "Spaghetti Bolognese",
-    "Lamb Biryani",
-    "Moussaka",
-  ];
-
   const apiFetchToRecipeObject = (apiFetch) => {
     let numIngredients = 1;
     while (
@@ -71,6 +44,36 @@ function App() {
     };
     return recipeObject;
   };
+
+  const api = {
+    address: "https://www.themealdb.com/api/json/v1/1",
+    fetcher: async function apiFetch(url) {
+      const result = await fetch(url);
+      const output = await result.json();
+      return output;
+    },
+    recipeToObjectFn: apiFetchToRecipeObject,
+    // cuisineListAddress: this.address + "/list.php?a=list",
+    // cuisineList: this.fetcher(this.cuisineListAddress),
+
+    // console.log(output);
+
+    search: "/search.php?s=",
+    random: "/random.php",
+  };
+
+  const initialRecipes = [
+    "Arrabiata",
+    "Beef Wellington",
+    "Pancakes",
+    "Tarte Tatin",
+    "Timbits",
+    "Irish Stew",
+    "Spaghetti Bolognese",
+    "Lamb Biryani",
+    "Moussaka",
+  ];
+
   // function initialise() {
   //   initialRecipes.forEach((recipe) => {
   //     let fetchedRecipe = api
@@ -207,7 +210,7 @@ function App() {
           path="/RecipesByCategory"
           element={<RecipesByCategory api={api} myRecipes={myRecipes} />}
         />
-        <Route path="/AddNewRecipes" element={<AddNewRecipes />} />
+        <Route path="/AddNewRecipes" element={<AddNewRecipes api={api} />} />
         <Route path="/ViewRecipe" element={<ViewRecipe />} />
         <Route path="/MakeRecipe" element={<MakeRecipe />} />
 
