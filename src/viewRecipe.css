@@ -1,7 +1,7 @@
 .pageContainer {
   display: grid;
   grid-template-columns: 2fr 3fr;
-  grid-template-rows: 1fr 9fr;
+  grid-template-rows: 10vh min-content;
 }
 
 .topRow {
@@ -61,6 +61,9 @@
   font-weight: bold;
 }
 
+.list {
+  padding: 0;
+}
 /* .recipeImageContainer {
   display: flex;
   flex-direction: column;

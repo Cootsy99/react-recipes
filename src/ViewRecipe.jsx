@@ -5,6 +5,7 @@ import "./viewRecipe.css";
 import IngredientViewItem from "./IngredientViewItem";
 import MethodViewItem from "./MethodViewItem";
 import { useEffect, useState } from "react";
+import NewIngredient from "./NewIngredient";
 
 export default function ViewRecipe() {
   const location = useLocation();
@@ -12,12 +13,15 @@ export default function ViewRecipe() {
   // console.log(!!location.state.info);
   const recipe = location.state ? location.state.info : null;
   // console.log(recipe);
-  const [ingredientsList, setIngredientsList] = useState("");
+  const [ingredientsList, setIngredientsList] = useState(undefined);
+  const [ingredientsToRender, setIngredientsToRender] = useState([]);
+  // let ingredients = [];
+  // let i = 1;
 
-  let ingredients = [];
-  let i = 1;
+  // console.log(recipe.ingredients);
 
   useEffect(() => {
+    let ingredients = [];
     for (const ingredient in recipe.ingredients) {
       // console.log(recipe.ingredients[ingredient]);
       ingredients.push(recipe.ingredients[ingredient]);
@@ -29,19 +33,42 @@ export default function ViewRecipe() {
 
   // console.log(ingredientsList);
 
-  let ingredientsToRender;
-  if (ingredientsList) {
-    ingredientsToRender = ingredientsList.map(function (item, index) {
-      return (
-        <IngredientViewItem
-          ingredient={item}
-          key={index}
-          index={index}
-          // markAsComplete={markAsComplete}
-          // removeFromList={removeFromList}
-        />
+  // function removeIngredient(ingredient) {
+  //   console.log(ingredient);
+  //   setIngredientsList(
+  //     ingredientsList.filter((item) => ingredient.index !== item.key)
+  //   );
+  // }
+
+  function removeIngredient(index) {
+    // console.log(ingredientsList.toSpliced(index, 1));
+    setIngredientsList(ingredientsList.toSpliced(index, 1));
+    // console.log(ingredientsList);
+  }
+
+  useEffect(() => {
+    if (ingredientsList) {
+      console.log("ingredient list");
+      console.log(ingredientsList);
+      setIngredientsToRender(
+        ingredientsList.map(function (item, index) {
+          return (
+            <IngredientViewItem
+              ingredient={item}
+              key={index}
+              index={index}
+              removeIngredient={removeIngredient}
+              // markAsComplete={markAsComplete}
+              // removeFromList={removeFromList}
+            />
+          );
+        })
       );
-    });
+    }
+  }, [ingredientsList]);
+
+  function addIngredient(ingredient) {
+    setIngredientsList([...ingredientsList, ingredient]);
   }
 
   // for (const ingredient in recipe.ingredients) {
@@ -58,7 +85,7 @@ export default function ViewRecipe() {
   // i++;
 
   // }
-
+  // NOTEEEE METHOD STILL NEEDS TO BE RE-RENDERED
   let method = [];
   let j = 1;
   for (const step in recipe.method) {
@@ -93,14 +120,17 @@ export default function ViewRecipe() {
         <div className="ingredientsContainer">
           <div className="ingredientsLabel">Ingredients</div>
 
-          <ul>{ingredientsToRender}</ul>
+          <ul className="list">{ingredientsToRender}</ul>
           {/* for each ingredient in the recipe, return a list item
            the item should be able to be deleted, edited  */}
-          <button className="addIngredientButton">Add Ingredient</button>
+          {/* <button className="addIngredientButton" addIngredient={addIngredient}>
+            Add Ingredient
+          </button> */}
+          <NewIngredient addIngredient={addIngredient} />
         </div>
         <div className="methodContainer">
           <div className="methodLabel">Method</div>
-          <ul>{method}</ul>
+          <ul className="list">{method}</ul>
 
           <button className="addStepButton">Add Step</button>
         </div>

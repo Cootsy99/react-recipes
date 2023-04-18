@@ -1,16 +1,43 @@
+import { useEffect, useState } from "react";
 import "./IngredientViewItem.css";
 
 export default function IngredientViewItem(props) {
+  const [editing, setEditing] = useState(false);
+  const [edited, setEdited] = useState(props.ingredient);
+
   function handleClick(event) {
-    console.log("clicked");
+    setEditing(!editing);
     // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
 
+  useEffect(() => setEdited(props.ingredient), [props.ingredient]);
+
   return (
     <li className="ingredientViewItem" style={{ backgroundColor: "hotpink" }}>
-      <span className="ingredientName">{props.ingredient}</span>
+      {editing ? (
+        <input
+          className="ingredientName"
+          type="text"
+          value={edited}
+          onChange={(event) => setEdited(event.target.value)}
+          required
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleClick(event);
+            }
+          }}
+        />
+      ) : (
+        <span className="ingredientName">{edited}</span>
+      )}
       <button onClick={handleClick} className="edit">
         {"✏️"}
+      </button>
+      <button
+        onClick={() => props.removeIngredient(props.index)}
+        className="delete"
+      >
+        ❌
       </button>
     </li>
   );

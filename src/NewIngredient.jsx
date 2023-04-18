@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function NewIngredient({ addToDo }) {
+export default function NewIngredient({ addIngredient }) {
   const [newIngredient, setNewIngredient] = useState("");
 
   function handleAddToDo(event) {
     event.preventDefault();
-    addToDo(newToDo);
+    addIngredient(newIngredient);
     setNewIngredient("");
   }
 
@@ -25,6 +25,6 @@ export default function NewIngredient({ addToDo }) {
   );
 }
 
-function addToDo(todo) {
-  setTodos([...todos, { text: todo, completed: false }]);
-}
+// function addToDo(todo) {
+//   setTodos([...todos, { text: todo, completed: false }]);
+// }

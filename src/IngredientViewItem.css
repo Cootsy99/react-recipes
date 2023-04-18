@@ -15,6 +15,12 @@
   height: fit-content;
 }
 
+.delete {
+  font-size: 15px;
+  width: fit-content;
+  height: fit-content;
+}
+
 .ingredientName {
   margin: auto;
 }
