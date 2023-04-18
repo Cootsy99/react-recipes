@@ -11,8 +11,6 @@ export default function AllRecipes({ myRecipes }) {
     setRecipesToRender(myRecipes);
   }, [myRecipes]);
 
-  //   console.log(myRecipes[0]["name"].toLowerCase()); //.indexOf(String(userSearch).toLowerCase())
-
   let recipes;
   if (recipesToRender) {
     if (userSearch) {
@@ -28,10 +26,6 @@ export default function AllRecipes({ myRecipes }) {
       recipes = recipesToRender;
     }
   }
-
-  //   console.log(recipes);
-
-  //   let recipesToRender = myRecipes;
 
   return (
     <div>

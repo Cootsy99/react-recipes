@@ -8,6 +8,29 @@ export default function RecipesByCategory({ api, myRecipes }) {
   const [categoryList, setCategoryList] = useState([]);
   const [active, setActive] = useState([]);
   const categoryListAddress = api.address + "/list.php?c=list";
+  const [userSearch, setUserSearch] = useState("");
+  const [recipesToRender, setRecipesToRender] = useState(undefined);
+  const handleChange = (event) => setUserSearch(event.target.value);
+
+  useEffect(() => {
+    setRecipesToRender(myRecipes);
+  }, [myRecipes]);
+
+  let recipes;
+  if (recipesToRender) {
+    if (userSearch) {
+      recipes = myRecipes.filter(
+        (recipe) =>
+          recipe["name"].toLowerCase().indexOf(userSearch.toLowerCase()) > -1 ||
+          recipe["cuisine"].toLowerCase().indexOf(userSearch.toLowerCase()) >
+            -1 ||
+          recipe["category"].toLowerCase().indexOf(userSearch.toLowerCase()) >
+            -1
+      );
+    } else {
+      recipes = recipesToRender;
+    }
+  }
 
   useEffect(() => {
     api
@@ -25,7 +48,7 @@ export default function RecipesByCategory({ api, myRecipes }) {
 
   return (
     <div>
-      <Search />
+      <Search userSearch={userSearch} handleChange={handleChange} />
       <div>
         <div className="buttonTabs">
           {categoryList.map((category, index) => {
@@ -39,7 +62,7 @@ export default function RecipesByCategory({ api, myRecipes }) {
             );
           })}
         </div>
-        <RecipeList active={active} myRecipes={myRecipes} />
+        <RecipeList active={active} myRecipes={recipes} />
       </div>
     </div>
   );
