@@ -1,11 +1,11 @@
 import RecipeList from "./RecipeList";
 import Search from "./Search";
 
-export default function AllRecipes() {
+export default function AllRecipes({ myRecipes }) {
   return (
     <div>
       <Search />
-      <RecipeList />
+      <RecipeList myRecipes={myRecipes} />
     </div>
   );
 }

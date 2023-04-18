@@ -17,3 +17,9 @@ img {
 div {
   margin: auto 0;
 }
+
+.recipeName,
+.recipeCategory,
+.recipeCuisine {
+  width: 20%;
+}

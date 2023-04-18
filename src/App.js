@@ -201,11 +201,11 @@ function App() {
         />
         <Route
           path="/RecipesByCuisine"
-          element={<RecipesByCuisine api={api} />}
+          element={<RecipesByCuisine api={api} myRecipes={myRecipes} />}
         />
         <Route
           path="/RecipesByCategory"
-          element={<RecipesByCategory api={api} />}
+          element={<RecipesByCategory api={api} myRecipes={myRecipes} />}
         />
         <Route path="/AddNewRecipes" element={<AddNewRecipes />} />
         <Route path="/ViewRecipe" element={<ViewRecipe />} />

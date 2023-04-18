@@ -41,7 +41,7 @@ export default function Home({ myRecipes }) {
       </div>
       <div>
         <header>Favorite Recipes</header>
-        <RecipeList />
+        <RecipeList myRecipes={myRecipes} />
       </div>
     </>
   );

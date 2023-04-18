@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeListItem from "./RecipeListItem";
 
 export default function RecipeList(props) {
+  const [recipesToRender, setRecipesToRender] = useState(undefined);
+  useEffect(() => {
+    setRecipesToRender(props.myRecipes);
+    // console.log(props.myRecipes);
+  }, [props.myRecipes]);
   let testRecipes = [
     {
       name: "Recipe 1",
@@ -18,17 +24,23 @@ export default function RecipeList(props) {
       category: "Pork",
     },
   ];
-  let recipes = testRecipes
-    .filter(
-      (recipe) =>
-        recipe.cuisine === props.active || recipe.category === props.active
-    )
-    .map((recipe, index) => {
-      return (
-        <Link to="/ViewRecipe" key={index}>
-          <RecipeListItem recipe={recipe} />
-        </Link>
-      );
-    });
+
+  //   props.active ? console.log("yes") : console.log("no");
+  let recipes;
+  if (recipesToRender) {
+    recipes = recipesToRender
+      .filter((recipe) =>
+        props.active
+          ? recipe.cuisine === props.active || recipe.category === props.active
+          : true
+      )
+      .map((recipe, index) => {
+        return (
+          <Link to="/ViewRecipe" key={index}>
+            <RecipeListItem recipe={recipe} />
+          </Link>
+        );
+      });
+  }
   return <>{recipes}</>;
 }

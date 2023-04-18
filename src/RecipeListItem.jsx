@@ -4,13 +4,13 @@ import "./placeholderPic.jpeg";
 export default function RecipeListItem({ recipe }) {
   return (
     <div className="recipeListItem">
-      <img src={recipe.picture} />
+      <img src={recipe.image} />
       <div>|</div>
-      <div>{recipe.name}</div>
+      <div className="recipeName">{recipe.name}</div>
       <div>|</div>
-      <div>{recipe.cuisine}</div>
+      <div className="recipeCuisine">{recipe.cuisine}</div>
       <div>|</div>
-      <div>{recipe.category}</div>
+      <div className="recipeCategory">{recipe.category}</div>
     </div>
   );
 }

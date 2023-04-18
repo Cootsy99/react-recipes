@@ -3,7 +3,7 @@ import Search from "./Search";
 import { useEffect, useState } from "react";
 import Tab from "./Tab";
 
-export default function RecipesByCuisine({ api }) {
+export default function RecipesByCuisine({ api, myRecipes }) {
   const [cuisineList, setCuisineList] = useState([]);
   const [active, setActive] = useState([]);
 
@@ -39,7 +39,7 @@ export default function RecipesByCuisine({ api }) {
             );
           })}
         </div>
-        <RecipeList active={active} />
+        <RecipeList active={active} myRecipes={myRecipes} />
       </div>
     </div>
   );

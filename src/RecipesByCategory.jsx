@@ -3,7 +3,7 @@ import RecipeList from "./RecipeList";
 import Search from "./Search";
 import Tab from "./Tab";
 
-export default function RecipesByCategory({ api }) {
+export default function RecipesByCategory({ api, myRecipes }) {
   //   const categories = ["Category 1", "Category 2", "Category 3"];
   const [categoryList, setCategoryList] = useState([]);
   const [active, setActive] = useState([]);
@@ -39,7 +39,7 @@ export default function RecipesByCategory({ api }) {
             );
           })}
         </div>
-        <RecipeList active={active} />
+        <RecipeList active={active} myRecipes={myRecipes} />
       </div>
     </div>
   );
