@@ -53,11 +53,6 @@ function App() {
       return output;
     },
     recipeToObjectFn: apiFetchToRecipeObject,
-    // cuisineListAddress: this.address + "/list.php?a=list",
-    // cuisineList: this.fetcher(this.cuisineListAddress),
-
-    // console.log(output);
-
     search: "/search.php?s=",
     random: "/random.php",
   };
@@ -74,63 +69,18 @@ function App() {
     "Moussaka",
   ];
 
-  // function initialise() {
-  //   initialRecipes.forEach((recipe) => {
-  //     let fetchedRecipe = api
-  //       .fetcher(api.address + api.search + recipe)
-  //       .then((result) => result["meals"])
-  //       .then((output) => setMyRecipes({ ...myRecipes, output }));
-  //   });
-  // }
   async function initialiser() {
     let fetchedRecipeArr = [];
     for (const recipe of initialRecipes) {
       const result = await api.fetcher(api.address + api.search + recipe);
-      // console.log(result["meals"][0]);
       fetchedRecipeArr.push(apiFetchToRecipeObject(result["meals"][0]));
-      // fetchedRecipeArr.push(recipeObject);
     }
     return fetchedRecipeArr;
   }
 
   useEffect(() => {
-    // initialiser().then((result) => setMyRecipes(result));
-
     initialiser().then((result) => setMyRecipes(result));
-
-    //   const fetched = api.fetcher(api.address + api.search + recipe);
-    //   const result = fetched["meals"][0];
-    //   fetchedRecipeArr.push(result);
-
-    // console.log(result);
-    // setMyRecipes([...myRecipes, result]);
-    // console.log(result["meals"][0]);
-    // result["meals"][0];
-    // })
-    // .then((output) => setMyRecipes([...myRecipes, output]));
-    // }
-    // console.log(calledRecipes);
-    // setMyRecipes({ ...myRecipes, calledRecipes });
   }, []);
-
-  // api
-  //   .fetcher(api.address + api.search + "Arrabiata")
-  //   .then((result) => result["meals"][0])
-  //   .then((output) => console.log(output));
-
-  // async function apiFetch(url) {
-  //   const result = await fetch(url);
-  //   const output = await result.json();
-  //   console.log(output);
-  // }
-
-  // api.fetcher(api.address + api.beefWellington);
-
-  // fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
-  //   .then((result) => result.json())
-  //   .then((output) => console.log(output));
-
-  // function initialRecipes() {}
 
   let meal = {
     idMeal: "52771",
@@ -189,8 +139,6 @@ function App() {
     strCreativeCommonsConfirmed: null,
     dateModified: null,
   };
-
-  // apiFetchToRecipeObject(meal);
 
   return (
     <div className="App">
