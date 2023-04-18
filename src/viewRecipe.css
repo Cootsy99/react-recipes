@@ -1,0 +1,23 @@
+.topRow {
+  display: flex;
+  justify-content: space-around;
+  height: 10vh;
+}
+
+.name {
+  width: 20%;
+  margin: auto 0;
+  font-weight: bold;
+}
+
+.makeButtonAnchor {
+  margin: auto 0;
+  width: 20%;
+}
+
+.addRecipeButton {
+  margin: auto 0;
+  padding: 3px 5px;
+  height: fit-content;
+  width: 20%;
+}

@@ -36,7 +36,11 @@ export default function RecipeList(props) {
       )
       .map((recipe, index) => {
         return (
-          <Link to="/ViewRecipe" key={index}>
+          <Link
+            to="/ViewRecipe"
+            key={index}
+            state={recipe ? { info: recipe } : { info: "no data" }}
+          >
             <RecipeListItem recipe={recipe} />
           </Link>
         );
