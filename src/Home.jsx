@@ -31,7 +31,7 @@ export default function Home({ myRecipes }) {
             {myRecipes.map((item, index) => {
               //   console.log(item["strMeal"]);
               // return <p>Working</p>;
-              return <p key={index}>{item["strMeal"]}</p>;
+              return <p key={index}>{item["name"]}</p>;
             })}
           </>
         ) : (
