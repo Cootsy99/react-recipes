@@ -10,7 +10,7 @@ export default function ViewRecipe() {
   const recipe = location.state ? location.state.info : null;
   console.log(recipe);
   return (
-    <div>
+    <div className="pageContainer">
       <div className="topRow">
         <div className="name">{recipe.name}</div>
 
@@ -21,16 +21,20 @@ export default function ViewRecipe() {
         <button className="addRecipeButton">Add this to my recipes</button>
       </div>
 
+      {/* <div className="recipeImageContainer"> */}
       <img className="recipeImage" src={recipe.image} />
-      <div className="ingredientsContainer">
-        <div className="ingredientsLabel">Ingredients</div>
-        {recipe.ingredients[0]}
-        <button className="addIngredientButton">Add Ingredient</button>
-      </div>
-      <div className="methodContainer">
-        <div className="methodLabel">Method</div>
-        {recipe.method[0]}
-        <button className="addStepButton">Add Step</button>
+      {/* </div> */}
+      <div className="ingredientsAndMethodContainer">
+        <div className="ingredientsContainer">
+          <div className="ingredientsLabel">Ingredients</div>
+          {recipe.ingredients[0]}
+          <button className="addIngredientButton">Add Ingredient</button>
+        </div>
+        <div className="methodContainer">
+          <div className="methodLabel">Method</div>
+          {recipe.method[0]}
+          <button className="addStepButton">Add Step</button>
+        </div>
       </div>
     </div>
   );

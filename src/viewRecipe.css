@@ -1,4 +1,12 @@
+.pageContainer {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr 9fr;
+}
+
 .topRow {
+  grid-row: 1;
+  grid-column: 1 / span 2;
   display: flex;
   justify-content: space-around;
   height: 10vh;
@@ -19,5 +27,42 @@
   margin: auto 0;
   padding: 3px 5px;
   height: fit-content;
-  width: 20%;
+  width: fit-content;
 }
+
+.recipeImage {
+  grid-row: 2;
+  grid-column: 1;
+  width: 40vh;
+  height: 40vh;
+  margin: 5vh auto;
+  border: solid black 4px;
+}
+
+.ingredientsAndMethodContainer {
+  grid-row: 2;
+  grid-column: 2;
+  margin: 5vh auto;
+}
+
+.ingredientsContainer {
+  margin: 2vh auto;
+}
+
+.ingredientsLabel {
+  font-weight: bold;
+}
+
+.methodContainer {
+  margin: 2vh auto;
+}
+
+.methodLabel {
+  font-weight: bold;
+}
+
+/* .recipeImageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+} */
