@@ -1,0 +1,33 @@
+.ingredientViewItem {
+  display: flex;
+  width: 50vh;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 5px;
+  border: 5px solid purple;
+  list-style: none;
+  font-size: 20px;
+}
+
+.edit {
+  font-size: 15px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.ingredientName {
+  margin: auto;
+}
+/* .ToDoListItem div {
+  width: 4vmin;
+  height: 4vmin;
+  margin-right: 4vmin;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  margin: auto 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+} */
