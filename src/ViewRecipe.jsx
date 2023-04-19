@@ -9,9 +9,26 @@ import NewIngredient from "./NewIngredient";
 import NewStep from "./NewStep";
 import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 
-export default function ViewRecipe() {
+export default function ViewRecipe(props) {
   const location = useLocation();
   const recipe = location.state ? location.state.info : null;
+
+  const [inMyRecipes, setInMyRecipes] = useState(false);
+  // console.log(recipe);
+  // console.log(props.myRecipes);
+
+  useEffect(() => {
+    if (props.myRecipes) {
+      const ids = props.myRecipes.map((recipe) => recipe.id);
+      // console.log(ids);
+      // console.log(recipe.id);
+      // console.log(ids.includes(recipe.id));
+      if (ids.includes(recipe.id)) {
+        setInMyRecipes(!inMyRecipes);
+        // console.log(inMyRecipes);
+      }
+    }
+  }, [props.myRecipes]);
 
   /***** INGREDIENTS *****/
   const [ingredientsList, setIngredientsList] = useState(undefined);
@@ -162,7 +179,18 @@ export default function ViewRecipe() {
           <button className="makeButton">Make this Recipe</button>
         </Link>
 
-        <button className="addRecipeButton">Add this to my recipes</button>
+        {!inMyRecipes && (
+          <button
+            className="addRecipeButton"
+            onClick={() => {
+              console.log(recipe);
+              props.setMyRecipes([...props.myRecipes, recipe]);
+              // console.log(props.myRecipes);
+            }}
+          >
+            Add this to my recipes
+          </button>
+        )}
       </div>
 
       <img className="recipeImage" src={recipe.image} />

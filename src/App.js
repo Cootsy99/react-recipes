@@ -159,7 +159,12 @@ function App() {
           element={<RecipesByCategory api={api} myRecipes={myRecipes} />}
         />
         <Route path="/AddNewRecipes" element={<AddNewRecipes api={api} />} />
-        <Route path="/ViewRecipe" element={<ViewRecipe />} />
+        <Route
+          path="/ViewRecipe"
+          element={
+            <ViewRecipe setMyRecipes={setMyRecipes} myRecipes={myRecipes} />
+          }
+        />
         <Route path="/MakeRecipe" element={<MakeRecipe />} />
 
         <Route path="*" element={<PageNotFound />} />
