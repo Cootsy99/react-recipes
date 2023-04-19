@@ -36,12 +36,14 @@ export default function IngredientViewItem(props) {
 
   return (
     <li className="ingredientViewItem" style={{ backgroundColor: "hotpink" }}>
-      <input
-        className="checkbox"
-        type="checkbox"
-        // checked="false"
-        onClick={(event) => props.handleCheckBoxClick(props.index, event)}
-      />
+      {props.inMyRecipes && (
+        <input
+          className="checkbox"
+          type="checkbox"
+          // checked="false"
+          onClick={(event) => props.handleCheckBoxClick(props.index, event)}
+        />
+      )}
       {editing ? (
         <input
           className="ingredientName"
@@ -58,15 +60,19 @@ export default function IngredientViewItem(props) {
       ) : (
         <span className="ingredientName">{edited}</span>
       )}
-      <button onClick={handleClick} className="edit">
-        {editing ? "✅" : "✏️"}
-      </button>
-      <button
-        onClick={() => props.removeIngredient(props.index)}
-        className="delete"
-      >
-        ❌
-      </button>
+      {props.inMyRecipes && (
+        <button onClick={handleClick} className="edit">
+          {editing ? "✅" : "✏️"}
+        </button>
+      )}
+      {props.inMyRecipes && (
+        <button
+          onClick={() => props.removeIngredient(props.index)}
+          className="delete"
+        >
+          ❌
+        </button>
+      )}
     </li>
   );
 }

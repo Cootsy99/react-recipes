@@ -7,27 +7,18 @@ import MethodViewItem from "./MethodViewItem";
 import { useEffect, useState } from "react";
 import NewIngredient from "./NewIngredient";
 import NewStep from "./NewStep";
-import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 
 export default function ViewRecipe(props) {
   const location = useLocation();
   const recipe = location.state ? location.state.info : null;
-  // console.log(recipe);
 
   const [inMyRecipes, setInMyRecipes] = useState(false);
-  // console.log(recipe);
-  // console.log(props.myRecipes);
 
   useEffect(() => {
     if (props.myRecipes) {
-      // console.log(props.myRecipes);
       const ids = props.myRecipes.map((recipe) => recipe.id);
-      // console.log(ids);
-      // console.log(recipe.id);
-      // console.log(ids.includes(recipe.id));
       if (ids.includes(recipe.id)) {
         setInMyRecipes(true);
-        // console.log(inMyRecipes);
       } else {
         setInMyRecipes(false);
       }
@@ -52,31 +43,11 @@ export default function ViewRecipe(props) {
   }
 
   function handleIngredCheckBoxClick(index, event) {
-    // console.log(ingredientsList[1]);
-    // console.log(event.target.checked);
     setCheckedIngredients([...checkedIngredients, index]);
   }
 
-  // useEffect(() => {
-  //   handleCheckBoxClic;
-  // });
-  //   // console.log(ingredientsList[index]);
-  //   // console.log([...checkedIngredients, ingredientsList[index]]);
-  //   // console.log("before");
-  //   // console.log(typeof ingredientsList[index]);
-  //   console.log("checkedIngredients", checkedIngredients);
-  //   setCheckedIngredients(["Updated"]); //[ingredientsList[index]]]);
-  //   console.log("after");
-  //   console.log("checkedIngredients", checkedIngredients);
-  //   console.log(ingredientsList[index]);
-
-  //   // console.log(checkedIngredients);
-  // }
-
   useEffect(() => {
     if (ingredientsList) {
-      // console.log("rerendering");
-      // console.log(ingredientsToRender);
       setIngredientsToRender(
         ingredientsList.map(function (item, index) {
           return (
@@ -88,17 +59,14 @@ export default function ViewRecipe(props) {
               handleCheckBoxClick={handleIngredCheckBoxClick}
               setIngredientsList={setIngredientsList}
               ingredientsList={ingredientsList}
-              // setCheckedIngredients={setCheckedIngredients}
               checkedIngredients={checkedIngredients}
+              inMyRecipes={inMyRecipes}
             />
           );
         })
       );
-      // console.log(ingredientsToRender);
     }
-  }, [ingredientsList, checkedIngredients]);
-
-  // useEffect(() => {});
+  }, [ingredientsList, checkedIngredients, inMyRecipes]);
 
   function rerenderRecipe() {
     let rerenderedIngredients = {};
@@ -108,11 +76,8 @@ export default function ViewRecipe(props) {
       });
     }
     let rerenderedRecipe = { ...recipe, ingredients: rerenderedIngredients };
-    // console.log(rerenderedIngredients);
     return rerenderedRecipe;
   }
-
-  // console.log(rerenderRecipe());
 
   useEffect(() => {
     if (props.myRecipes) {
@@ -138,7 +103,6 @@ export default function ViewRecipe(props) {
     const itemsToRemove = [...ingredientsList].filter((ingredient, index) =>
       checkedIngredients.some((i) => index === i)
     );
-    // console.log(itemsToRemove);
     setIngredientsList(
       ingredientsList.filter(
         (ingredient) => !itemsToRemove.includes(ingredient)
@@ -149,7 +113,6 @@ export default function ViewRecipe(props) {
   function handleDeleteAllIngreds() {
     setIngredientsList([]);
   }
-  // z.filter((el,i)=>x.some(j => i === j))
 
   /***** METHOD *****/
 
@@ -170,7 +133,6 @@ export default function ViewRecipe(props) {
   }
 
   function handleStepCheckBoxClick(index, event) {
-    // console.log(event.target.checked);
     setCheckedSteps([...checkedSteps, index]);
   }
 
@@ -200,7 +162,6 @@ export default function ViewRecipe(props) {
     const itemsToRemove = [...methodList].filter((step, index) =>
       checkedSteps.some((i) => index === i)
     );
-    // console.log(itemsToRemove);
     setMethodList(methodList.filter((step) => !itemsToRemove.includes(step)));
   }
 
@@ -221,9 +182,7 @@ export default function ViewRecipe(props) {
           <button
             className="addRecipeButton"
             onClick={() => {
-              // console.log(recipe);
               props.setMyRecipes([...props.myRecipes, recipe]);
-              // console.log(props.myRecipes);
             }}
           >
             Add this to my recipes
@@ -248,25 +207,33 @@ export default function ViewRecipe(props) {
       <img className="recipeImage" src={recipe.image} />
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
-          <button onClick={handleDeleteSelectedIngreds}>
-            Delete Selected Ingredients
-          </button>
-          <button onClick={handleDeleteAllIngreds}>
-            Delete All Ingredients
-          </button>
+          {inMyRecipes && (
+            <button onClick={handleDeleteSelectedIngreds}>
+              Delete Selected Ingredients
+            </button>
+          )}
+          {inMyRecipes && (
+            <button onClick={handleDeleteAllIngreds}>
+              Delete All Ingredients
+            </button>
+          )}
 
           <div className="ingredientsLabel">Ingredients</div>
           <ul className="list">{ingredientsToRender}</ul>
-          <NewIngredient addIngredient={addIngredient} />
+          {inMyRecipes && <NewIngredient addIngredient={addIngredient} />}
         </div>
         <div className="methodContainer">
-          <button onClick={handleDeleteSelectedSteps}>
-            Delete Selected Steps
-          </button>
-          <button onClick={handleDeleteAllSteps}>Delete All Steps</button>
+          {inMyRecipes && (
+            <button onClick={handleDeleteSelectedSteps}>
+              Delete Selected Steps
+            </button>
+          )}
+          {inMyRecipes && (
+            <button onClick={handleDeleteAllSteps}>Delete All Steps</button>
+          )}
           <div className="methodLabel">Method</div>
           <ul className="list">{stepsToRender}</ul>
-          <NewStep addStep={addStep} />
+          {inMyRecipes && <NewStep addStep={addStep} />}
         </div>
       </div>
     </div>
