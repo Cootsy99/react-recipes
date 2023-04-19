@@ -19,7 +19,6 @@ export default function IngredientViewItem(props) {
   // }
 
   useEffect(() => {
-    console.log("rerendered");
     setEdited(props.ingredient);
   }, [props.ingredient]);
 

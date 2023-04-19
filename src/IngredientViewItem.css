@@ -9,20 +9,22 @@
   font-size: 20px;
 }
 
+.ingredientName {
+  margin: auto;
+  max-width: 60%;
+}
 .edit {
   font-size: 15px;
   width: fit-content;
   height: fit-content;
+  margin: auto 10px;
 }
 
 .delete {
   font-size: 15px;
   width: fit-content;
   height: fit-content;
-}
-
-.ingredientName {
-  margin: auto;
+  margin: auto 10px;
 }
 
 .checkbox {

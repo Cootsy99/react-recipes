@@ -7,6 +7,7 @@ import MethodViewItem from "./MethodViewItem";
 import { useEffect, useState } from "react";
 import NewIngredient from "./NewIngredient";
 import NewStep from "./NewStep";
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 
 export default function ViewRecipe() {
   const location = useLocation();
@@ -29,7 +30,7 @@ export default function ViewRecipe() {
     setIngredientsList(ingredientsList.toSpliced(index, 1));
   }
 
-  function handleCheckBoxClick(index, event) {
+  function handleIngredCheckBoxClick(index, event) {
     // console.log(ingredientsList[1]);
     console.log(event.target.checked);
     setCheckedIngredients([...checkedIngredients, index]);
@@ -63,7 +64,7 @@ export default function ViewRecipe() {
               key={index}
               index={index}
               removeIngredient={removeIngredient}
-              handleCheckBoxClick={handleCheckBoxClick}
+              handleCheckBoxClick={handleIngredCheckBoxClick}
               // setCheckedIngredients={setCheckedIngredients}
               checkedIngredients={checkedIngredients}
             />
@@ -96,6 +97,7 @@ export default function ViewRecipe() {
 
   const [methodList, setMethodList] = useState(undefined);
   const [stepsToRender, setStepsToRender] = useState([]);
+  const [checkedSteps, setCheckedSteps] = useState([]);
 
   useEffect(() => {
     let steps = [];
@@ -109,6 +111,11 @@ export default function ViewRecipe() {
     setMethodList(methodList.toSpliced(index, 1));
   }
 
+  function handleStepCheckBoxClick(index, event) {
+    // console.log(event.target.checked);
+    setCheckedSteps([...checkedSteps, index]);
+  }
+
   useEffect(() => {
     if (methodList) {
       setStepsToRender(
@@ -119,15 +126,24 @@ export default function ViewRecipe() {
               key={index}
               index={index}
               removeStep={removeStep}
+              handleCheckBoxClick={handleStepCheckBoxClick}
             />
           );
         })
       );
     }
-  }, [methodList]);
+  }, [methodList, checkedSteps]);
 
   function addStep(step) {
     setMethodList([...methodList, step]);
+  }
+
+  function handleDeleteSelectedSteps() {
+    const itemsToRemove = [...methodList].filter((step, index) =>
+      checkedSteps.some((i) => index === i)
+    );
+    // console.log(itemsToRemove);
+    setMethodList(methodList.filter((step) => !itemsToRemove.includes(step)));
   }
 
   return (
@@ -145,13 +161,18 @@ export default function ViewRecipe() {
       <img className="recipeImage" src={recipe.image} />
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
-          <button onClick={handleDeleteSelectedIngreds}>Delete Selected</button>
+          <button onClick={handleDeleteSelectedIngreds}>
+            Delete Selected Ingredients
+          </button>
 
           <div className="ingredientsLabel">Ingredients</div>
           <ul className="list">{ingredientsToRender}</ul>
           <NewIngredient addIngredient={addIngredient} />
         </div>
         <div className="methodContainer">
+          <button onClick={handleDeleteSelectedSteps}>
+            Delete Selected Steps
+          </button>
           <div className="methodLabel">Method</div>
           <ul className="list">{stepsToRender}</ul>
           <NewStep addStep={addStep} />

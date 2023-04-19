@@ -5,7 +5,7 @@ export default function MethodViewItem(props) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.step);
 
-  function handleClick(event) {
+  function handleClick() {
     setEditing(!editing);
     // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
@@ -14,6 +14,12 @@ export default function MethodViewItem(props) {
 
   return (
     <li className="stepViewItem" style={{ backgroundColor: "hotpink" }}>
+      <input
+        className="checkbox"
+        type="checkbox"
+        // checked="false"
+        onClick={(event) => props.handleCheckBoxClick(props.index, event)}
+      />
       {editing ? (
         <input
           className="stepName"

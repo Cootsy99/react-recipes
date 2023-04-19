@@ -13,10 +13,25 @@
   font-size: 15px;
   width: fit-content;
   height: fit-content;
+  margin: auto 10px;
+}
+
+.delete {
+  font-size: 15px;
+  width: fit-content;
+  height: fit-content;
+  margin: auto 10px;
 }
 
 .stepName {
   margin: auto;
+  max-width: 60%;
+  text-align: left;
+}
+
+.checkbox {
+  width: 5%;
+  margin: auto 2%;
 }
 /* .ToDoListItem div {
     width: 4vmin;
