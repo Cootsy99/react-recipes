@@ -7,19 +7,29 @@ export default function MethodViewItem(props) {
 
   function handleClick() {
     setEditing(!editing);
-    // todo.completed ? removeFromList(todo) : markAsComplete(todo);
+    props.setMethodList(
+      props.methodList.map((step, index) => {
+        if (index === props.index) {
+          return edited;
+        } else {
+          return step;
+        }
+      })
+    );
   }
 
   useEffect(() => setEdited(props.step), [props.step]);
 
   return (
     <li className="stepViewItem" style={{ backgroundColor: "hotpink" }}>
-      <input
-        className="checkbox"
-        type="checkbox"
-        // checked="false"
-        onClick={(event) => props.handleCheckBoxClick(props.index, event)}
-      />
+      {props.inMyRecipes && (
+        <input
+          className="checkbox"
+          type="checkbox"
+          // checked="false"
+          onClick={(event) => props.handleCheckBoxClick(props.index, event)}
+        />
+      )}
       {editing ? (
         <input
           className="stepName"
@@ -36,12 +46,19 @@ export default function MethodViewItem(props) {
       ) : (
         <span className="stepName">{edited}</span>
       )}
-      <button onClick={handleClick} className="edit">
-        {"✏️"}
-      </button>
-      <button onClick={() => props.removeStep(props.index)} className="delete">
-        ❌
-      </button>
+      {props.inMyRecipes && (
+        <button onClick={handleClick} className="edit">
+          {editing ? "✅" : "✏️"}
+        </button>
+      )}
+      {props.inMyRecipes && (
+        <button
+          onClick={() => props.removeStep(props.index)}
+          className="delete"
+        >
+          ❌
+        </button>
+      )}
     </li>
   );
 }

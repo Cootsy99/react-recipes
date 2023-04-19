@@ -68,7 +68,7 @@ export default function ViewRecipe(props) {
     }
   }, [ingredientsList, checkedIngredients, inMyRecipes]);
 
-  function rerenderRecipe() {
+  function rerenderRecipeForIngreds() {
     let rerenderedIngredients = {};
     if (ingredientsList) {
       ingredientsList.forEach((ingredient, i) => {
@@ -81,7 +81,7 @@ export default function ViewRecipe(props) {
 
   useEffect(() => {
     if (props.myRecipes) {
-      const renderedRecipe = rerenderRecipe();
+      const renderedRecipe = rerenderRecipeForIngreds();
       console.log(renderedRecipe);
       props.setMyRecipes(
         props.myRecipes.map((recipeItem) => {
@@ -147,12 +147,43 @@ export default function ViewRecipe(props) {
               index={index}
               removeStep={removeStep}
               handleCheckBoxClick={handleStepCheckBoxClick}
+              setMethodList={setMethodList}
+              methodList={methodList}
+              checkedSteps={checkedSteps}
+              inMyRecipes={inMyRecipes}
             />
           );
         })
       );
     }
-  }, [methodList, checkedSteps]);
+  }, [methodList, checkedSteps, inMyRecipes]);
+
+  function rerenderRecipeForMethod() {
+    let rerenderedMethod = {};
+    if (methodList) {
+      methodList.forEach((step, i) => {
+        rerenderedMethod[`Step ${i + 1}`] = step;
+      });
+    }
+    let rerenderedRecipe = { ...recipe, method: rerenderedMethod };
+    return rerenderedRecipe;
+  }
+
+  useEffect(() => {
+    if (props.myRecipes) {
+      const renderedRecipe = rerenderRecipeForMethod();
+      // console.log(renderedRecipe);
+      props.setMyRecipes(
+        props.myRecipes.map((recipeItem) => {
+          if (recipe["id"] === recipeItem["id"]) {
+            return renderedRecipe;
+          } else {
+            return recipeItem;
+          }
+        })
+      );
+    }
+  }, [methodList]);
 
   function addStep(step) {
     setMethodList([...methodList, step]);

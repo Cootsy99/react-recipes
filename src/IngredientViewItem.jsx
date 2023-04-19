@@ -21,7 +21,7 @@ export default function IngredientViewItem(props) {
         }
       })
     );
-    console.log(props.index);
+    // console.log(props.index);
     // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
 
