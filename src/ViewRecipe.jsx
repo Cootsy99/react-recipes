@@ -12,11 +12,9 @@ export default function ViewRecipe() {
   const location = useLocation();
   const recipe = location.state ? location.state.info : null;
 
+  /***** INGREDIENTS *****/
   const [ingredientsList, setIngredientsList] = useState(undefined);
   const [ingredientsToRender, setIngredientsToRender] = useState([]);
-
-  const [methodList, setMethodList] = useState(undefined);
-  const [stepsToRender, setStepsToRender] = useState([]);
 
   useEffect(() => {
     let ingredients = [];
@@ -26,6 +24,36 @@ export default function ViewRecipe() {
     setIngredientsList(ingredients);
   }, []);
 
+  function removeIngredient(index) {
+    setIngredientsList(ingredientsList.toSpliced(index, 1));
+  }
+
+  useEffect(() => {
+    if (ingredientsList) {
+      setIngredientsToRender(
+        ingredientsList.map(function (item, index) {
+          return (
+            <IngredientViewItem
+              ingredient={item}
+              key={index}
+              index={index}
+              removeIngredient={removeIngredient}
+            />
+          );
+        })
+      );
+    }
+  }, [ingredientsList]);
+
+  function addIngredient(ingredient) {
+    setIngredientsList([...ingredientsList, ingredient]);
+  }
+
+  /***** METHOD *****/
+
+  const [methodList, setMethodList] = useState(undefined);
+  const [stepsToRender, setStepsToRender] = useState([]);
+
   useEffect(() => {
     let steps = [];
     for (const step in recipe.method) {
@@ -33,10 +61,6 @@ export default function ViewRecipe() {
     }
     setMethodList(steps);
   }, []);
-
-  function removeIngredient(index) {
-    setIngredientsList(ingredientsList.toSpliced(index, 1));
-  }
 
   function removeStep(index) {
     setMethodList(methodList.toSpliced(index, 1));
@@ -59,29 +83,8 @@ export default function ViewRecipe() {
     }
   }, [methodList]);
 
-  useEffect(() => {
-    if (ingredientsList) {
-      setIngredientsToRender(
-        ingredientsList.map(function (item, index) {
-          return (
-            <IngredientViewItem
-              ingredient={item}
-              key={index}
-              index={index}
-              removeIngredient={removeIngredient}
-            />
-          );
-        })
-      );
-    }
-  }, [ingredientsList]);
-
   function addStep(step) {
     setMethodList([...methodList, step]);
-  }
-
-  function addIngredient(ingredient) {
-    setIngredientsList([...ingredientsList, ingredient]);
   }
 
   return (
