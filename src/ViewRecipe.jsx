@@ -91,6 +91,9 @@ export default function ViewRecipe() {
     );
   }
 
+  function handleDeleteAllIngreds() {
+    setIngredientsList([]);
+  }
   // z.filter((el,i)=>x.some(j => i === j))
 
   /***** METHOD *****/
@@ -146,6 +149,10 @@ export default function ViewRecipe() {
     setMethodList(methodList.filter((step) => !itemsToRemove.includes(step)));
   }
 
+  function handleDeleteAllSteps() {
+    setMethodList([]);
+  }
+
   return (
     <div className="pageContainer">
       <div className="topRow">
@@ -164,6 +171,9 @@ export default function ViewRecipe() {
           <button onClick={handleDeleteSelectedIngreds}>
             Delete Selected Ingredients
           </button>
+          <button onClick={handleDeleteAllIngreds}>
+            Delete All Ingredients
+          </button>
 
           <div className="ingredientsLabel">Ingredients</div>
           <ul className="list">{ingredientsToRender}</ul>
@@ -173,6 +183,7 @@ export default function ViewRecipe() {
           <button onClick={handleDeleteSelectedSteps}>
             Delete Selected Steps
           </button>
+          <button onClick={handleDeleteAllSteps}>Delete All Steps</button>
           <div className="methodLabel">Method</div>
           <ul className="list">{stepsToRender}</ul>
           <NewStep addStep={addStep} />
