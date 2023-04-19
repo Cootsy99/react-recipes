@@ -4,16 +4,33 @@ import "./IngredientViewItem.css";
 export default function IngredientViewItem(props) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.ingredient);
+  // const [checkedIngredients, setCheckedIngredients] = useState([
+  //   "initial value",
+  // ]);
 
-  function handleClick(event) {
+  function handleClick() {
     setEditing(!editing);
     // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
 
-  useEffect(() => setEdited(props.ingredient), [props.ingredient]);
+  // function handleCheckBoxClick(index) {
+  //   setCheckedIngredients([...checkedIngredients, "added"]);
+  //   console.log(checkedIngredients);
+  // }
+
+  useEffect(() => {
+    console.log("rerendered");
+    setEdited(props.ingredient);
+  }, [props.ingredient]);
 
   return (
     <li className="ingredientViewItem" style={{ backgroundColor: "hotpink" }}>
+      <input
+        className="checkbox"
+        type="checkbox"
+        // checked="false"
+        onClick={(event) => props.handleCheckBoxClick(props.index, event)}
+      />
       {editing ? (
         <input
           className="ingredientName"

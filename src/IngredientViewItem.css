@@ -24,6 +24,11 @@
 .ingredientName {
   margin: auto;
 }
+
+.checkbox {
+  width: 5%;
+  margin: auto 2%;
+}
 /* .ToDoListItem div {
   width: 4vmin;
   height: 4vmin;

@@ -15,6 +15,7 @@ export default function ViewRecipe() {
   /***** INGREDIENTS *****/
   const [ingredientsList, setIngredientsList] = useState(undefined);
   const [ingredientsToRender, setIngredientsToRender] = useState([]);
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   useEffect(() => {
     let ingredients = [];
@@ -28,8 +29,32 @@ export default function ViewRecipe() {
     setIngredientsList(ingredientsList.toSpliced(index, 1));
   }
 
+  function handleCheckBoxClick(index, event) {
+    // console.log(ingredientsList[1]);
+    console.log(event.target.checked);
+    setCheckedIngredients([...checkedIngredients, index]);
+  }
+
+  // useEffect(() => {
+  //   handleCheckBoxClic;
+  // });
+  //   // console.log(ingredientsList[index]);
+  //   // console.log([...checkedIngredients, ingredientsList[index]]);
+  //   // console.log("before");
+  //   // console.log(typeof ingredientsList[index]);
+  //   console.log("checkedIngredients", checkedIngredients);
+  //   setCheckedIngredients(["Updated"]); //[ingredientsList[index]]]);
+  //   console.log("after");
+  //   console.log("checkedIngredients", checkedIngredients);
+  //   console.log(ingredientsList[index]);
+
+  //   // console.log(checkedIngredients);
+  // }
+
   useEffect(() => {
     if (ingredientsList) {
+      // console.log("rerendering");
+      // console.log(ingredientsToRender);
       setIngredientsToRender(
         ingredientsList.map(function (item, index) {
           return (
@@ -38,16 +63,34 @@ export default function ViewRecipe() {
               key={index}
               index={index}
               removeIngredient={removeIngredient}
+              handleCheckBoxClick={handleCheckBoxClick}
+              // setCheckedIngredients={setCheckedIngredients}
+              checkedIngredients={checkedIngredients}
             />
           );
         })
       );
+      // console.log(ingredientsToRender);
     }
-  }, [ingredientsList]);
+  }, [ingredientsList, checkedIngredients]);
 
   function addIngredient(ingredient) {
     setIngredientsList([...ingredientsList, ingredient]);
   }
+
+  function handleDeleteSelectedIngreds() {
+    const itemsToRemove = [...ingredientsList].filter((ingredient, index) =>
+      checkedIngredients.some((i) => index === i)
+    );
+    console.log(itemsToRemove);
+    setIngredientsList(
+      ingredientsList.filter(
+        (ingredient) => !itemsToRemove.includes(ingredient)
+      )
+    );
+  }
+
+  // z.filter((el,i)=>x.some(j => i === j))
 
   /***** METHOD *****/
 
@@ -102,8 +145,9 @@ export default function ViewRecipe() {
       <img className="recipeImage" src={recipe.image} />
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
-          <div className="ingredientsLabel">Ingredients</div>
+          <button onClick={handleDeleteSelectedIngreds}>Delete Selected</button>
 
+          <div className="ingredientsLabel">Ingredients</div>
           <ul className="list">{ingredientsToRender}</ul>
           <NewIngredient addIngredient={addIngredient} />
         </div>
