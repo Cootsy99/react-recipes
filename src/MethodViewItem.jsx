@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function MethodViewItem(props) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.step);
+  const [completed, setCompleted] = useState(false);
 
   function handleClick() {
     setEditing(!editing);
@@ -21,7 +22,19 @@ export default function MethodViewItem(props) {
   useEffect(() => setEdited(props.step), [props.step]);
 
   return (
-    <li className="stepViewItem" style={{ backgroundColor: "hotpink" }}>
+    <li
+      className="stepViewItem"
+      style={
+        completed
+          ? {
+              backgroundColor: "darkgreen",
+              border: "solid red 5px",
+            }
+          : {
+              backgroundColor: "hotpink",
+            }
+      }
+    >
       {props.inMyRecipes && (
         <input
           className="checkbox"
@@ -48,8 +61,11 @@ export default function MethodViewItem(props) {
           className="stepName"
           style={
             props.makeRecipe
-              ? { maxWidth: "100%", margin: 0 }
-              : { maxWidth: "60%", margin: 0 }
+              ? {
+                  maxWidth: "100%",
+                  textDecoration: completed && "line-through",
+                }
+              : { maxWidth: "60%" }
           }
         >
           {edited}
@@ -66,6 +82,18 @@ export default function MethodViewItem(props) {
           className="delete"
         >
           ❌
+        </button>
+      )}
+      {props.makeRecipe && (
+        <button
+          onClick={() => setCompleted(!completed)}
+          className="made"
+          style={{
+            backgroundColor: "lightGreen",
+            fontSize: "20px",
+          }}
+        >
+          {!completed ? "✔️" : "↩️"}
         </button>
       )}
     </li>

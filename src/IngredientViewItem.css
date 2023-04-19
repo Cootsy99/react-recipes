@@ -1,17 +1,19 @@
 .ingredientViewItem {
   display: flex;
   width: 50vh;
+  max-height: fit-content;
   justify-content: space-between;
   margin: 20px auto;
   padding: 5px;
   border: 5px solid purple;
   list-style: none;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .ingredientName {
   margin: auto;
-  max-width: 60%;
+  max-width: 70%;
+  height: fit-content;
 }
 .edit {
   font-size: 15px;
@@ -30,6 +32,9 @@
 .checkbox {
   width: 5%;
   margin: auto 2%;
+}
+.made {
+  margin: auto 0;
 }
 /* .ToDoListItem div {
   width: 4vmin;

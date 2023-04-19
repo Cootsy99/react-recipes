@@ -102,6 +102,7 @@ export default function IngredientViewItem(props) {
       {props.makeRecipe && (
         <button
           onClick={() => setCompleted(!completed)}
+          className="made"
           style={{
             backgroundColor: "lightGreen",
             fontSize: "20px",
