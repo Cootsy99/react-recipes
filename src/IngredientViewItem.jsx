@@ -85,6 +85,9 @@ export default function IngredientViewItem(props) {
           {edited}
         </span>
       )}
+      {props.pic && (
+        <img src={`https://${props.pic}`} className="ingredPic"></img>
+      )}
       {props.inMyRecipes && (
         <button onClick={handleClick} className="edit">
           {editing ? "✅" : "✏️"}

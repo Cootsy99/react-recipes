@@ -19,7 +19,7 @@ export default function AddNewRecipes({ api }) {
       }
       setRecipesToRender(fetchedRecipeArr);
     } else {
-      console.log("No recipes found");
+      setRecipesToRender(undefined);
     }
   }
 
@@ -41,11 +41,12 @@ export default function AddNewRecipes({ api }) {
           handleSubmit={handleSubmit}
         />
         <button onClick={handleRandomClick}>Random Recipe</button>
-        <button>Make own Recipe</button>
+        {/* <button>Make own Recipe</button> */}
         <RecipeList myRecipes={recipesToRender} />
+        {!recipesToRender && <h2>No Recipes Found </h2>}
       </div>
       <div>
-        Browse by Popular Ingredients | Browse by Category | Browse by Cuisine
+        {/* Browse by Popular Ingredients | Browse by Category | Browse by Cuisine */}
       </div>
     </>
   );

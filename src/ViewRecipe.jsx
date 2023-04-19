@@ -49,6 +49,15 @@ export default function ViewRecipe(props) {
     setCheckedIngredients([...checkedIngredients, index]);
   }
 
+  // console.log(props.myIngredients);
+  function checkForPic(ingredientListItem) {
+    // console.log(ingredientListItem);
+
+    return props.myIngredients
+      .map((ingredient) => ingredientListItem.includes(ingredient))
+      .indexOf(true);
+  }
+
   useEffect(() => {
     if (ingredientsList) {
       setIngredientsToRender(
@@ -64,12 +73,18 @@ export default function ViewRecipe(props) {
               ingredientsList={ingredientsList}
               checkedIngredients={checkedIngredients}
               inMyRecipes={inMyRecipes}
+              pic={
+                checkForPic(item) > -1 &&
+                props.ingredientPics[
+                  `${props.myIngredients[checkForPic(item)]}`
+                ]
+              }
             />
           );
         })
       );
     }
-  }, [ingredientsList, checkedIngredients, inMyRecipes]);
+  }, [ingredientsList, checkedIngredients, inMyRecipes, props.myIngredients]);
 
   function rerenderRecipeForIngreds() {
     let rerenderedIngredients = {};
@@ -206,7 +221,9 @@ export default function ViewRecipe(props) {
   return (
     <div className="pageContainer">
       <div className="topRow">
-        <div className="name">{recipe.name}</div>
+        <div className="name">
+          <h1>{recipe.name}</h1>
+        </div>
 
         <Link
           className="makeButtonAnchor"
@@ -261,8 +278,11 @@ export default function ViewRecipe(props) {
       </div>
 
       <img className="recipeImage" src={recipe.image} />
+      {/* <img src={"https://www.themealdb.com/images/ingredients/mushrooms.png"} /> */}
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
+          <div className="ingredientsLabel">Ingredients</div>
+
           {inMyRecipes && (
             <button onClick={handleDeleteSelectedIngreds}>
               Delete Selected Ingredients
@@ -274,11 +294,12 @@ export default function ViewRecipe(props) {
             </button>
           )}
 
-          <div className="ingredientsLabel">Ingredients</div>
           <ul className="list">{ingredientsToRender}</ul>
           {inMyRecipes && <NewIngredient addIngredient={addIngredient} />}
         </div>
         <div className="methodContainer">
+          <div className="methodLabel">Method</div>
+
           {inMyRecipes && (
             <button onClick={handleDeleteSelectedSteps}>
               Delete Selected Steps
@@ -287,7 +308,6 @@ export default function ViewRecipe(props) {
           {inMyRecipes && (
             <button onClick={handleDeleteAllSteps}>Delete All Steps</button>
           )}
-          <div className="methodLabel">Method</div>
           <ul className="list">{stepsToRender}</ul>
           {inMyRecipes && <NewStep addStep={addStep} />}
         </div>

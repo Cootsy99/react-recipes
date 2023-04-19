@@ -12,6 +12,7 @@
 img {
   height: 100px;
   width: 100px;
+  border: solid black 3px;
 }
 
 div {

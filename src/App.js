@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [myRecipes, setMyRecipes] = useState(undefined);
+  const [myIngredients, setMyIngredients] = useState([]);
+  const [ingredientPics, setIngredientPics] = useState({});
 
   const apiFetchToRecipeObject = (apiFetch) => {
     let numIngredients = 1;
@@ -24,11 +26,18 @@ function App() {
     }
     numIngredients--;
     let ingredientsAndQuantity = {};
+    let ingredientsForPics = [];
     for (let i = 0; i < numIngredients; i++) {
+      // console.log(apiFetch[`strIngredient${i + 1}`]);
       ingredientsAndQuantity[`Ingredient ${i + 1}`] = `${
         apiFetch[`strMeasure${i + 1}`]
       } ${apiFetch[`strIngredient${i + 1}`]}`;
+      ingredientsForPics.push(apiFetch[`strIngredient${i + 1}`]);
     }
+    // console.log("run");
+    // console.log(myIngredients);
+    // setMyIngredients([...myIngredients, "test"]);
+    // console.log(ingredients);
 
     let methodArr = apiFetch.strInstructions.match(/[^\.]+[\.]+/g);
     let steps = {};
@@ -41,6 +50,7 @@ function App() {
       ingredients: ingredientsAndQuantity,
       method: steps,
       image: apiFetch.strMealThumb,
+      ingredientsForPics: ingredientsForPics,
     };
     return recipeObject;
   };
@@ -55,6 +65,7 @@ function App() {
     recipeToObjectFn: apiFetchToRecipeObject,
     search: "/search.php?s=",
     random: "/random.php",
+    ingredientPic: "www.themealdb.com/images/ingredients/",
   };
 
   const initialRecipes = [
@@ -81,6 +92,33 @@ function App() {
   useEffect(() => {
     initialiser().then((result) => setMyRecipes(result));
   }, []);
+
+  useEffect(() => {
+    let ingredientUrls = {};
+    let ingredients = [];
+    if (myRecipes) {
+      myRecipes.forEach((recipe) => {
+        recipe.ingredientsForPics.forEach((ingredient) => {
+          // console.log(ingredient);
+          if (
+            !myIngredients.includes(ingredient) &&
+            !ingredients.includes(ingredient)
+          ) {
+            ingredientUrls[
+              `${ingredient}`
+            ] = `www.themealdb.com/images/ingredients/${ingredient}.png`;
+            ingredients.push(ingredient);
+          }
+        });
+      });
+    }
+    setIngredientPics({ ...ingredientPics, ...ingredientUrls });
+    setMyIngredients([...myIngredients, ...ingredients]);
+  }, [myRecipes]);
+
+  // useEffect(() =>{
+
+  // })
 
   let meal = {
     idMeal: "52771",
@@ -162,7 +200,12 @@ function App() {
         <Route
           path="/ViewRecipe"
           element={
-            <ViewRecipe setMyRecipes={setMyRecipes} myRecipes={myRecipes} />
+            <ViewRecipe
+              setMyRecipes={setMyRecipes}
+              myRecipes={myRecipes}
+              myIngredients={myIngredients}
+              ingredientPics={ingredientPics}
+            />
           }
         />
         <Route path="/MakeRecipe" element={<MakeRecipe />} />

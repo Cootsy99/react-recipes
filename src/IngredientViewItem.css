@@ -36,6 +36,11 @@
 .made {
   margin: auto 0;
 }
+.ingredPic {
+  border: none;
+  height: 50px;
+  width: auto;
+}
 /* .ToDoListItem div {
   width: 4vmin;
   height: 4vmin;
