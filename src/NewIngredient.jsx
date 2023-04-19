@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function NewIngredient({ addIngredient }) {
   const [newIngredient, setNewIngredient] = useState("");
 
-  function handleAddToDo(event) {
+  function handleAddIngredient(event) {
     event.preventDefault();
     addIngredient(newIngredient);
     setNewIngredient("");
@@ -12,7 +12,7 @@ export default function NewIngredient({ addIngredient }) {
   return (
     <>
       {/* <h2> New To-Do </h2> */}
-      <form onSubmit={handleAddToDo}>
+      <form onSubmit={handleAddIngredient}>
         <input
           value={newIngredient}
           onChange={(event) => setNewIngredient(event.target.value)}

@@ -6,6 +6,7 @@ import IngredientViewItem from "./IngredientViewItem";
 import MethodViewItem from "./MethodViewItem";
 import { useEffect, useState } from "react";
 import NewIngredient from "./NewIngredient";
+import NewStep from "./NewStep";
 
 export default function ViewRecipe() {
   const location = useLocation();
@@ -15,6 +16,9 @@ export default function ViewRecipe() {
   // console.log(recipe);
   const [ingredientsList, setIngredientsList] = useState(undefined);
   const [ingredientsToRender, setIngredientsToRender] = useState([]);
+
+  const [methodList, setMethodList] = useState(undefined);
+  const [stepsToRender, setStepsToRender] = useState([]);
   // let ingredients = [];
   // let i = 1;
 
@@ -31,6 +35,16 @@ export default function ViewRecipe() {
     // console.log("in use effect");
   }, []);
 
+  useEffect(() => {
+    let steps = [];
+    for (const step in recipe.method) {
+      // console.log(recipe.ingredients[ingredient]);
+      steps.push(recipe.method[step]);
+      // console.log(ingredients);
+    }
+    setMethodList(steps);
+  }, []);
+
   // console.log(ingredientsList);
 
   // function removeIngredient(ingredient) {
@@ -45,6 +59,31 @@ export default function ViewRecipe() {
     setIngredientsList(ingredientsList.toSpliced(index, 1));
     // console.log(ingredientsList);
   }
+
+  function removeStep(index) {
+    setMethodList(methodList.toSpliced(index, 1));
+  }
+
+  useEffect(() => {
+    if (methodList) {
+      console.log("method list");
+      console.log(methodList);
+      setStepsToRender(
+        methodList.map(function (item, index) {
+          return (
+            <MethodViewItem
+              step={item}
+              key={index}
+              index={index}
+              removeStep={removeStep}
+              // markAsComplete={markAsComplete}
+              // removeFromList={removeFromList}
+            />
+          );
+        })
+      );
+    }
+  }, [methodList]);
 
   useEffect(() => {
     if (ingredientsList) {
@@ -67,6 +106,10 @@ export default function ViewRecipe() {
     }
   }, [ingredientsList]);
 
+  function addStep(step) {
+    setMethodList([...methodList, step]);
+  }
+
   function addIngredient(ingredient) {
     setIngredientsList([...ingredientsList, ingredient]);
   }
@@ -86,20 +129,20 @@ export default function ViewRecipe() {
 
   // }
   // NOTEEEE METHOD STILL NEEDS TO BE RE-RENDERED
-  let method = [];
-  let j = 1;
-  for (const step in recipe.method) {
-    // console.log("RAN");
-    // console.log(ingredient, recipe.ingredients[ingredient]);
-    method.push(
-      <MethodViewItem
-        key={j}
-        stepNum={step}
-        step={recipe.method[step]}
-      ></MethodViewItem>
-    );
-    j++;
-  }
+  // let method = [];
+  // let j = 1;
+  // for (const step in recipe.method) {
+  //   // console.log("RAN");
+  //   // console.log(ingredient, recipe.ingredients[ingredient]);
+  //   method.push(
+  //     <MethodViewItem
+  //       key={j}
+  //       stepNum={step}
+  //       step={recipe.method[step]}
+  //     ></MethodViewItem>
+  //   );
+  //   j++;
+  // }
 
   return (
     <div className="pageContainer">
@@ -130,9 +173,8 @@ export default function ViewRecipe() {
         </div>
         <div className="methodContainer">
           <div className="methodLabel">Method</div>
-          <ul className="list">{method}</ul>
-
-          <button className="addStepButton">Add Step</button>
+          <ul className="list">{stepsToRender}</ul>
+          <NewStep addStep={addStep} />
         </div>
       </div>
     </div>
