@@ -4,12 +4,24 @@ import "./IngredientViewItem.css";
 export default function IngredientViewItem(props) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.ingredient);
+
+  // console.log(props.ingredientsList);
   // const [checkedIngredients, setCheckedIngredients] = useState([
   //   "initial value",
   // ]);
 
   function handleClick() {
     setEditing(!editing);
+    props.setIngredientsList(
+      props.ingredientsList.map((ingredient, index) => {
+        if (index === props.index) {
+          return edited;
+        } else {
+          return ingredient;
+        }
+      })
+    );
+    console.log(props.index);
     // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
 
@@ -47,7 +59,7 @@ export default function IngredientViewItem(props) {
         <span className="ingredientName">{edited}</span>
       )}
       <button onClick={handleClick} className="edit">
-        {"✏️"}
+        {editing ? "✅" : "✏️"}
       </button>
       <button
         onClick={() => props.removeIngredient(props.index)}

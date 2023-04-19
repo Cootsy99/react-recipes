@@ -30,6 +30,13 @@
   width: fit-content;
 }
 
+.deleteRecipeButton {
+  margin: auto 0;
+  padding: 3px 5px;
+  height: fit-content;
+  width: fit-content;
+}
+
 .recipeImage {
   grid-row: 2;
   grid-column: 1;
