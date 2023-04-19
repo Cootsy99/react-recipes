@@ -25,7 +25,7 @@ export default function Home({ myRecipes }) {
           <button>Add New Recipes</button>
         </Link>
       </div>
-      <div>
+      {/* <div>
         {myRecipes ? (
           <>
             {myRecipes.map((item, index) => {
@@ -38,7 +38,7 @@ export default function Home({ myRecipes }) {
           //   <div>Loaded {myRecipes[5]["strMeal"]}</div>
           <div>Waiting</div>
         )}
-      </div>
+      </div> */}
       <div>
         <header>Favorite Recipes</header>
         <RecipeList myRecipes={myRecipes} />
