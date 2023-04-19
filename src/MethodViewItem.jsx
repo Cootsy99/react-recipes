@@ -44,7 +44,16 @@ export default function MethodViewItem(props) {
           }}
         />
       ) : (
-        <span className="stepName">{edited}</span>
+        <span
+          className="stepName"
+          style={
+            props.makeRecipe
+              ? { maxWidth: "100%", margin: 0 }
+              : { maxWidth: "60%", margin: 0 }
+          }
+        >
+          {edited}
+        </span>
       )}
       {props.inMyRecipes && (
         <button onClick={handleClick} className="edit">

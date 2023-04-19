@@ -12,7 +12,10 @@ export default function ViewRecipe(props) {
   const location = useLocation();
   const recipe = location.state ? location.state.info : null;
 
+  // console.log(recipe);
+
   const [inMyRecipes, setInMyRecipes] = useState(false);
+  const [renderedRecipe, setRenderedRecipe] = useState(recipe);
 
   useEffect(() => {
     if (props.myRecipes) {
@@ -82,7 +85,7 @@ export default function ViewRecipe(props) {
   useEffect(() => {
     if (props.myRecipes) {
       const renderedRecipe = rerenderRecipeForIngreds();
-      console.log(renderedRecipe);
+      // console.log(renderedRecipe);
       props.setMyRecipes(
         props.myRecipes.map((recipeItem) => {
           if (recipe["id"] === recipeItem["id"]) {
@@ -205,7 +208,29 @@ export default function ViewRecipe(props) {
       <div className="topRow">
         <div className="name">{recipe.name}</div>
 
-        <Link className="makeButtonAnchor" to="/MakeRecipe">
+        <Link
+          className="makeButtonAnchor"
+          to="/MakeRecipe"
+          state={
+            ingredientsList && methodList && recipe
+              ? {
+                  ingredients: ingredientsList,
+                  method: methodList,
+                  image: recipe["image"],
+                  name: recipe["name"],
+                }
+              : {
+                  ingredients: undefined,
+                  method: undefined,
+                  image: undefined,
+                  name: undefined,
+                } //,
+            // methodList ? { method: methodList } : { method: undefined }) //,
+            // recipe
+            //   ? { image: recipe["image"], name: recipe["name"] }
+            //   : { image: undefined, name: undefined })
+          }
+        >
           <button className="makeButton">Make this Recipe</button>
         </Link>
 

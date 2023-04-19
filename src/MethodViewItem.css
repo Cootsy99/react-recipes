@@ -2,8 +2,8 @@
   display: flex;
   width: 50vh;
   justify-content: space-between;
-  margin: 20px;
-  padding: 5px;
+  margin: 20px auto;
+  padding: 10px;
   border: 5px solid purple;
   list-style: none;
   font-size: 20px;
@@ -27,6 +27,7 @@
   margin: auto;
   max-width: 60%;
   text-align: left;
+  padding: 5px;
 }
 
 .checkbox {

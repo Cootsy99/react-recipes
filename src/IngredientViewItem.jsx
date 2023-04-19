@@ -4,6 +4,7 @@ import "./IngredientViewItem.css";
 export default function IngredientViewItem(props) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.ingredient);
+  const [completed, setCompleted] = useState(false);
 
   // console.log(props.ingredientsList);
   // const [checkedIngredients, setCheckedIngredients] = useState([
@@ -35,7 +36,19 @@ export default function IngredientViewItem(props) {
   }, [props.ingredient]);
 
   return (
-    <li className="ingredientViewItem" style={{ backgroundColor: "hotpink" }}>
+    <li
+      className="ingredientViewItem"
+      style={
+        completed
+          ? {
+              backgroundColor: "darkgreen",
+              border: "solid red 5px",
+            }
+          : {
+              backgroundColor: "hotpink",
+            }
+      }
+    >
       {props.inMyRecipes && (
         <input
           className="checkbox"
@@ -58,7 +71,19 @@ export default function IngredientViewItem(props) {
           }}
         />
       ) : (
-        <span className="ingredientName">{edited}</span>
+        <span
+          className="ingredientName"
+          style={
+            props.makeRecipe
+              ? {
+                  maxWidth: "100%",
+                  textDecoration: completed && "line-through",
+                }
+              : { maxWidth: "60%" }
+          }
+        >
+          {edited}
+        </span>
       )}
       {props.inMyRecipes && (
         <button onClick={handleClick} className="edit">
@@ -71,6 +96,18 @@ export default function IngredientViewItem(props) {
           className="delete"
         >
           ❌
+        </button>
+      )}
+
+      {props.makeRecipe && (
+        <button
+          onClick={() => setCompleted(!completed)}
+          style={{
+            backgroundColor: "lightGreen",
+            fontSize: "20px",
+          }}
+        >
+          {!completed ? "✔️" : "↩️"}
         </button>
       )}
     </li>
