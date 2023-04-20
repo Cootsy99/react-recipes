@@ -4,7 +4,8 @@
   top: 0;
   min-height: fit-content;
   line-height: 60px;
-  width: 100vw;
+  width: 100%;
+  margin: 0 0 3vh 0;
 }
 
 .NavContainer {

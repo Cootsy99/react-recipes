@@ -1,0 +1,71 @@
+:root {
+  --primaryColor: #2d4059;
+  --secondColor: #ea5455;
+  --accentColor: #f7b801;
+  --neutralColor1: #4f5d75;
+  --neutralColor2: #a3b5c1;
+  --pastel1: #f6d8ae;
+  --pastel2: #e1d1d0;
+  --pastel3: #d0ece7;
+  --pastel4: #c6d1cd;
+  --pastel5: #f7e1d7;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90vw;
+  margin: 5vh auto;
+}
+
+/* .buttonName {
+  margin: auto;
+  /* padding: 3px; 
+}*/
+
+button {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 30vh;
+  width: 30vh;
+  color: var(--secondColor);
+  /* margin: 3vh; */
+  padding: 0;
+  border: 2px solid black;
+}
+
+.buttonLabelContainer {
+  height: 6vh;
+  width: 100%;
+  /* width: -webkit-calc(100% - 4px); */
+  margin: 0;
+  background-color: var(--pastel1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  border-top: 2px solid black;
+}
+
+.allRecipes {
+  background: url("https://wtop.com/wp-content/uploads/2022/08/080422_mighty-Meals.jpg")
+    no-repeat scroll 0 0 transparent;
+}
+
+.byCuisine {
+  background: url("https://static.toiimg.com/thumb/74416043.cms?width=680&height=512&imgsize=1947366")
+    no-repeat scroll 0 0 transparent;
+}
+
+.byCategory {
+  background: url("https://uploads-ssl.webflow.com/5d29522d187e93122ebca7e0/5db1e42bee04b385d3a79759_HealthyFood.jpg")
+    no-repeat scroll 0 0 transparent;
+}
+
+.addNew {
+  /* background: url("https://uploads-ssl.webflow.com/5d29522d187e93122ebca7e0/5db1e42bee04b385d3a79759_HealthyFood.jpg") */
+  background: url("https://static01.nyt.com/images/2020/04/30/dining/30substitutions/30substitutions-square640.jpg")
+    no-repeat scroll 0 0 transparent;
+}

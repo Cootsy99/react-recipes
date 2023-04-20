@@ -8,9 +8,9 @@ export default function RecipeListItem({ recipe }) {
       <div>|</div>
       <h3 className="recipeName">{recipe.name}</h3>
       <div>|</div>
-      <h3 className="recipeCuisine">{recipe.cuisine}</h3>
+      <h4 className="recipeCuisine">{recipe.cuisine}</h4>
       <div>|</div>
-      <h3 className="recipeCategory">{recipe.category}</h3>
+      <h4 className="recipeCategory">{recipe.category}</h4>
     </div>
   );
 }

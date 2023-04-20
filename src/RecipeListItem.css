@@ -14,7 +14,7 @@
 .recipeListItem {
   display: flex;
   justify-content: space-around;
-  margin: 20px;
+  margin: 5vh 8vh;
   padding: 10px;
   border: 3px solid var(--secondColor);
   list-style: none;
@@ -29,12 +29,9 @@ img {
   border: solid black 3px;
 }
 
-div {
-  margin: auto 0;
-  color: var(--secondColor);
-}
-
-h3 {
+div,
+h3,
+h4 {
   margin: auto 0;
   color: var(--secondColor);
 }

@@ -28,11 +28,9 @@ export default function MethodViewItem(props) {
         completed
           ? {
               backgroundColor: "darkgreen",
-              border: "solid red 5px",
+              border: "solid red 3px",
             }
-          : {
-              backgroundColor: "hotpink",
-            }
+          : {}
       }
     >
       {props.inMyRecipes && (

@@ -2,6 +2,7 @@ import RecipeList from "./RecipeList";
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import Tab from "./Tab";
+import "./RecipesByCuisine.css";
 
 export default function RecipesByCuisine({ api, myRecipes }) {
   const [cuisineList, setCuisineList] = useState([]);
@@ -48,20 +49,26 @@ export default function RecipesByCuisine({ api, myRecipes }) {
   return (
     <div>
       <Search userSearch={userSearch} handleChange={handleChange} />
-      <div>
-        <div className="buttonTabs">
-          {cuisineList.map((cuisine, index) => {
-            return (
-              <Tab
-                key={index}
-                active={active === cuisine}
-                setActive={setActive}
-                category={cuisine}
-              ></Tab>
-            );
-          })}
+      <div className="cuisinesContainer">
+        <div className="row1Column1">
+          <div className="buttonTabs">
+            {cuisineList.map((cuisine, index) => {
+              return (
+                <Tab
+                  key={index}
+                  active={active === cuisine}
+                  setActive={setActive}
+                  category={cuisine}
+                ></Tab>
+              );
+            })}
+          </div>
         </div>
-        <RecipeList active={active} myRecipes={recipes} />
+        <div className="row1Column2">
+          <div className="recipesContainer">
+            <RecipeList active={active} myRecipes={recipes} />
+          </div>
+        </div>
       </div>
     </div>
   );
