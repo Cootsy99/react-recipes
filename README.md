@@ -117,13 +117,13 @@ Obviously a big component of this project is using a 3rd party API. I needed to 
 Once the decision of what the application should be was made, the next step was to build some wireframes. See below
 
 <p align="center">
-<img src="homeWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="allRecipesWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="byCuisineWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="byCategoryWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="addWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="viewWF.JPG" alt="simple wireframe image"  width=50% height=50%>
-<img src="makeWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/homeWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/allRecipesWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/byCuisineWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/byCategoryWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/addWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/viewWF.JPG" alt="simple wireframe image"  width=50% height=50%>
+<img src="src/makeWF.JPG" alt="simple wireframe image"  width=50% height=50%>
 
 </p>
 
