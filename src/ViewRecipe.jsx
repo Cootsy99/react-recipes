@@ -245,12 +245,14 @@ export default function ViewRecipe(props) {
                   method: methodList,
                   image: recipe["image"],
                   name: recipe["name"],
+                  ingredientPics: props.ingredientPics,
                 }
               : {
                   ingredients: undefined,
                   method: undefined,
                   image: undefined,
                   name: undefined,
+                  ingredientPics: undefined,
                 } //,
             // methodList ? { method: methodList } : { method: undefined }) //,
             // recipe

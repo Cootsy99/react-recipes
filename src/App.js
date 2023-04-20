@@ -89,7 +89,6 @@ function App() {
   };
 
   const initialRecipes = [
-    "Arrabiata",
     "BBQ Pork Sloppy Joes",
     "Beef Wellington",
     "Beef stroganoff",
@@ -121,6 +120,7 @@ function App() {
     "Split Pea Soup",
     "Spaghetti Bolognese",
     "Spaghetti alla Carbonara",
+    "Arrabiata",
     "Tarte Tatin",
     "Three-cheese souffles",
     "Timbits",
@@ -147,7 +147,6 @@ function App() {
     if (myRecipes) {
       myRecipes.forEach((recipe) => {
         recipe.ingredientsForPics.forEach((ingredient) => {
-          // console.log(ingredient);
           if (
             !myIngredients.includes(ingredient) &&
             !ingredients.includes(ingredient)
