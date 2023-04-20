@@ -1,3 +1,11 @@
+:root {
+  --primaryColor: #2d4059;
+  --secondColor: #ea5455;
+  --accentColor: #f7b801;
+  --neutralColor1: #4f5d75;
+  --neutralColor2: #a3b5c1;
+}
+
 .ingredientViewItem {
   display: flex;
   width: 50vh;

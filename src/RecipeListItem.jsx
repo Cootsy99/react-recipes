@@ -6,11 +6,11 @@ export default function RecipeListItem({ recipe }) {
     <div className="recipeListItem">
       <img src={recipe.image} />
       <div>|</div>
-      <div className="recipeName">{recipe.name}</div>
+      <h3 className="recipeName">{recipe.name}</h3>
       <div>|</div>
-      <div className="recipeCuisine">{recipe.cuisine}</div>
+      <h3 className="recipeCuisine">{recipe.cuisine}</h3>
       <div>|</div>
-      <div className="recipeCategory">{recipe.category}</div>
+      <h3 className="recipeCategory">{recipe.category}</h3>
     </div>
   );
 }

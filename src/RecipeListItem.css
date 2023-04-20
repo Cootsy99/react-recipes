@@ -1,22 +1,42 @@
+:root {
+  --primaryColor: #2d4059;
+  --secondColor: #ea5455;
+  --accentColor: #f7b801;
+  --neutralColor1: #4f5d75;
+  --neutralColor2: #a3b5c1;
+  --pastel1: #f6d8ae;
+  --pastel2: #e1d1d0;
+  --pastel3: #d0ece7;
+  --pastel4: #c6d1cd;
+  --pastel5: #f7e1d7;
+}
+
 .recipeListItem {
   display: flex;
   justify-content: space-around;
   margin: 20px;
   padding: 10px;
-  border: 5px solid rgba(84, 109, 182, 255);
+  border: 3px solid var(--secondColor);
   list-style: none;
   font-size: 24px;
   text-align: center;
+  background-color: var(--pastel4);
 }
 
 img {
-  height: 100px;
-  width: 100px;
+  height: 20vh;
+  width: 20vh;
   border: solid black 3px;
 }
 
 div {
   margin: auto 0;
+  color: var(--secondColor);
+}
+
+h3 {
+  margin: auto 0;
+  color: var(--secondColor);
 }
 
 .recipeName,

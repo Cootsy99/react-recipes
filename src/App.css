@@ -1,11 +1,27 @@
+:root {
+  --primaryColor: #2d4059;
+  --secondColor: #ea5455;
+  --accentColor: #f7b801;
+  --neutralColor1: #4f5d75;
+  --neutralColor2: #a3b5c1;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=IBM+Plex+Mono:wght@100&family=Sora&family=Yanone+Kaffeesatz:wght@500&display=swap");
+
 .App {
+  font-family: "sora";
   text-align: center;
-  background-color: rgb(168, 214, 203);
+  /* background-color: var(--secondaryColor); */
+  background-color: var(--primaryColor);
+  /* rgb(168, 214, 203); */
   min-height: 100vh;
 }
 
 button {
   margin: 10px;
   padding: 3px 5px;
-  background-color: rgba(247, 69, 24, 255);
+  background-color: var(--secondColor);
+  font-family: "sora";
+
+  /* rgba(247, 69, 24, 255); */
 }
