@@ -28,6 +28,16 @@ export default function ViewRecipe(props) {
     }
   }, [props.myRecipes]);
 
+  function compare(recipe1, recipe2) {
+    if (recipe1.name < recipe2.name) {
+      return -1;
+    }
+    if (recipe1.name > recipe2.name) {
+      return 1;
+    }
+    return 0;
+  }
+
   /***** INGREDIENTS *****/
   const [ingredientsList, setIngredientsList] = useState(undefined);
   const [ingredientsToRender, setIngredientsToRender] = useState([]);
@@ -255,7 +265,7 @@ export default function ViewRecipe(props) {
           <button
             className="addRecipeButton"
             onClick={() => {
-              props.setMyRecipes([...props.myRecipes, recipe]);
+              props.setMyRecipes([...props.myRecipes, recipe].sort(compare));
             }}
           >
             Add This To My Recipes
