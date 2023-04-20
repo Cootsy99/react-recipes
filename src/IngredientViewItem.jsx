@@ -41,8 +41,8 @@ export default function IngredientViewItem(props) {
       style={
         completed
           ? {
-              backgroundColor: "darkgreen",
-              border: "solid red 3px",
+              backgroundColor: "lightgreen",
+              // border: "solid red 3px",
             }
           : {}
       }

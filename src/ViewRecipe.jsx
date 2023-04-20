@@ -248,7 +248,7 @@ export default function ViewRecipe(props) {
             //   : { image: undefined, name: undefined })
           }
         >
-          <button className="makeButton">Make this Recipe</button>
+          <button className="makeButton">Make This Recipe</button>
         </Link>
 
         {!inMyRecipes && (
@@ -258,7 +258,7 @@ export default function ViewRecipe(props) {
               props.setMyRecipes([...props.myRecipes, recipe]);
             }}
           >
-            Add this to my recipes
+            Add This To My Recipes
           </button>
         )}
         {inMyRecipes && (

@@ -27,7 +27,7 @@ export default function MethodViewItem(props) {
       style={
         completed
           ? {
-              backgroundColor: "darkgreen",
+              backgroundColor: "lightgreen",
               border: "solid red 3px",
             }
           : {}
