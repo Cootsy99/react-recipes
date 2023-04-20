@@ -1,5 +1,6 @@
 {
   "name": "react-recipes",
+  "homepage": "https://cootsy99.github.io/react-recipes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
