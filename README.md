@@ -1,4 +1,4 @@
-# Tic Tac Toe - Stranger Things Edition
+# React-Recipes
 
 ## Purpose:
 
