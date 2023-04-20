@@ -8,7 +8,7 @@ export default function Tab(props) {
         border: "2px solid #ea5455",
         opacity: "1",
         margin: "0",
-        height: "wvw",
+        height: "3vw",
         width: "15vw",
       }
     : {

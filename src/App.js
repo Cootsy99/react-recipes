@@ -10,11 +10,30 @@ import ViewRecipe from "./ViewRecipe";
 import MakeRecipe from "./MakeRecipe";
 import PageNotFound from "./PageNotFound";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [myRecipes, setMyRecipes] = useState(undefined);
   const [myIngredients, setMyIngredients] = useState([]);
   const [ingredientPics, setIngredientPics] = useState({});
+  const [activeTab, setActiveTab] = useState("Home");
+
+  // console.log(window.location);
+  const location = useLocation();
+
+  // console.log(window.location);
+
+  useEffect(() => {
+    const pageKeywords = ["Category", "All", "Cuisine", "New"];
+    const currentPage = pageKeywords.filter((keyWord) =>
+      window.location.href.includes(keyWord)
+    );
+    window.location.href.slice(-1) === "/"
+      ? setActiveTab("Home")
+      : setActiveTab(currentPage[0]);
+  }, [window.location.href]);
+
+  // console.log(window.location.href.includes("Category"));
 
   const apiFetchToRecipeObject = (apiFetch) => {
     let numIngredients = 1;
@@ -180,7 +199,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <Routes>
         <Route path="/" element={<Home myRecipes={myRecipes} />} />
