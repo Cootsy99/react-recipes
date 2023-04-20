@@ -44,7 +44,11 @@ export default function Home({ myRecipes }) {
       </div>
       <div>
         <h1>Favorite Recipes</h1>
-        <RecipeList myRecipes={myRecipes} />
+        {myRecipes ? (
+          <RecipeList myRecipes={myRecipes} />
+        ) : (
+          <h1>Fetching Data</h1>
+        )}
       </div>
     </>
   );

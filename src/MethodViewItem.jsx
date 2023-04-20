@@ -64,8 +64,8 @@ export default function MethodViewItem(props) {
                   textDecoration: completed && "line-through",
                 }
               : props.inMyRecipes
-              ? { maxWidth: "60%" }
-              : { maxWidth: "100%" }
+              ? { maxWidth: "70%" }
+              : { width: "100%" }
           }
         >
           {edited}
