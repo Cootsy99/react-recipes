@@ -110,7 +110,7 @@ Recipe books have multiple lists - the list of recipes, the list of ingredients 
 
 ### API
 
-Obviously a big component of this project is using a 3rd party API. I needed to ensure that if the recipe book idea was going to fly that there existed a sensible API to use.
+Obviously a big component of this project is using a 3rd party API. I needed to ensure that if the recipe book idea was going to fly that there existed a sensible API to use. I identified a sensible API found at - https://www.themealdb.com/api.php - which seemed like a sensible choice and contained all the data I would need.
 
 ### Wireframing
 
@@ -316,7 +316,7 @@ One bit of styling I thought was particularly nifty and required the use of my g
 For example, this is the nav bar after we have navigated to the 'My Recipes By Cuisine' page:
 
 <p align="center">
-<img src="NavBar.png" alt="nav bar with 'My Recipes By Cuisine' highlighted"  width=100% height=50%>
+<img src="src/NavBar.png" alt="nav bar with 'My Recipes By Cuisine' highlighted"  width=100% height=50%>
 </p>
 
 The bulk of the code to achieve this is shown below:
