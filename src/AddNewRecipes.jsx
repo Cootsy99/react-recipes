@@ -40,7 +40,9 @@ export default function AddNewRecipes({ api }) {
           wantSearchButton={wantSearchButton}
           handleSubmit={handleSubmit}
         />
-        <button onClick={handleRandomClick}>Random Recipe</button>
+        <button className="random" onClick={handleRandomClick}>
+          Random Recipe
+        </button>
         {/* <button>Make own Recipe</button> */}
         <RecipeList myRecipes={recipesToRender} />
         {!recipesToRender && <h2>No Recipes Found </h2>}

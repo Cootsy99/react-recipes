@@ -14,28 +14,28 @@ export default function Home({ myRecipes }) {
     <>
       <div className="buttonsContainer">
         <Link to="/AllRecipes">
-          <button className="allRecipes">
+          <button className="allRecipes navButton">
             <div className="buttonLabelContainer">
               <h3 className="buttonName">All My Recipes</h3>
             </div>
           </button>
         </Link>
         <Link to="/RecipesByCuisine">
-          <button className="byCuisine">
+          <button className="byCuisine navButton">
             <div className="buttonLabelContainer">
               <h3 className="buttonName">My Recipes by Cuisine</h3>
             </div>
           </button>
         </Link>
         <Link to="/RecipesByCategory">
-          <button className="byCategory">
+          <button className="byCategory navButton">
             <div className="buttonLabelContainer">
               <h3 className="buttonName">My Recipes by Category</h3>
             </div>
           </button>
         </Link>
         <Link to="/AddNewRecipes">
-          <button className="addNew">
+          <button className="addNew navButton">
             <div className="buttonLabelContainer">
               <h3 className="buttonName">Add New Recipes</h3>
             </div>

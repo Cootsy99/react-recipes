@@ -18,6 +18,12 @@ export default function NewIngredient({ addIngredient }) {
           onChange={(event) => setNewIngredient(event.target.value)}
           placeholder="Add a new ingredient"
           required
+          style={{
+            backgroundColor: "white",
+            width: "20vw",
+            borderRadius: 0,
+            fontSize: "15px",
+          }}
         />
         <button type="submit">Add New Ingredient</button>
       </form>

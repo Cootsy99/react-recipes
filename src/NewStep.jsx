@@ -17,6 +17,12 @@ export default function NewStep({ addStep }) {
           onChange={(event) => setNewStep(event.target.value)}
           placeholder="Add a new step"
           required
+          style={{
+            backgroundColor: "white",
+            width: "20vw",
+            borderRadius: 0,
+            fontSize: "15px",
+          }}
         />
         <button type="submit">Add New Step</button>
       </form>

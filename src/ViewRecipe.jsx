@@ -272,7 +272,7 @@ export default function ViewRecipe(props) {
               );
             }}
           >
-            DELETE RECIPE
+            Delete Recipe
           </button>
         )}
       </div>
@@ -281,7 +281,7 @@ export default function ViewRecipe(props) {
       {/* <img src={"https://www.themealdb.com/images/ingredients/mushrooms.png"} /> */}
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
-          <div className="ingredientsLabel">Ingredients</div>
+          <h2 className="ingredientsLabel">Ingredients</h2>
 
           {inMyRecipes && (
             <button onClick={handleDeleteSelectedIngreds}>
@@ -298,7 +298,7 @@ export default function ViewRecipe(props) {
           {inMyRecipes && <NewIngredient addIngredient={addIngredient} />}
         </div>
         <div className="methodContainer">
-          <div className="methodLabel">Method</div>
+          <h2 className="methodLabel">Method</h2>
 
           {inMyRecipes && (
             <button onClick={handleDeleteSelectedSteps}>

@@ -1,3 +1,31 @@
+:root {
+  --primaryColor: #2d4059;
+  --secondColor: #ea5455;
+  --accentColor: #f7b801;
+  --neutralColor1: #4f5d75;
+  --neutralColor2: #a3b5c1;
+  --pastel1: #f6d8ae;
+  --pastel2: #e1d1d0;
+  --pastel3: #d0ece7;
+  --pastel4: #c6d1cd;
+  --pastel5: #f7e1d7;
+}
+
 .searchRow {
   display: block;
+}
+
+.random {
+  margin: 10px;
+  padding: 3px 5px;
+  height: fit-content;
+  background-color: var(--secondColor);
+  font-family: "sora";
+  cursor: pointer;
+  color: var(--pastel1);
+  font-weight: bold;
+  text-align: center;
+  width: fit-content;
+
+  /* rgba(247, 69, 24, 255); */
 }
