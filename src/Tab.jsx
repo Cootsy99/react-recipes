@@ -1,4 +1,5 @@
 export default function Tab(props) {
+  //Generating the relevant tab styling depending on if it is selected in the recipes by category/cuisine components
   const tabStyling = props.active
     ? {
         cursor: "pointer",

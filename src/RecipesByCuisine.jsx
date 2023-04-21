@@ -5,17 +5,27 @@ import Tab from "./Tab";
 import "./RecipesByCuisine.css";
 
 export default function RecipesByCuisine({ api, myRecipes }) {
+  //setup states
   const [cuisineList, setCuisineList] = useState([]);
+
   const [active, setActive] = useState([]);
-  const cuisineListAddress = api.address + "/list.php?a=list";
+
   const [userSearch, setUserSearch] = useState("");
+
   const [recipesToRender, setRecipesToRender] = useState(undefined);
+
+  //cuisine api address
+  const cuisineListAddress = api.address + "/list.php?a=list";
+
+  //searchbar input update
   const handleChange = (event) => setUserSearch(event.target.value);
 
+  //updates the list of recipes whenever the prop is updated
   useEffect(() => {
     setRecipesToRender(myRecipes);
   }, [myRecipes]);
 
+  //deals with user search input
   let recipes;
   if (recipesToRender) {
     if (userSearch) {
@@ -32,6 +42,7 @@ export default function RecipesByCuisine({ api, myRecipes }) {
     }
   }
 
+  //uses the api to get the list of cuisines
   useEffect(() => {
     api
       .fetcher(cuisineListAddress)

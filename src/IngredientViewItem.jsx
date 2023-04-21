@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import "./IngredientViewItem.css";
 
 export default function IngredientViewItem(props) {
+  //setup states
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.ingredient);
   const [completed, setCompleted] = useState(false);
 
-  // console.log(props.ingredientsList);
-  // const [checkedIngredients, setCheckedIngredients] = useState([
-  //   "initial value",
-  // ]);
-
+  //handles click of edit ingredient button
   function handleClick() {
     setEditing(!editing);
     props.setIngredientsList(
@@ -22,39 +19,33 @@ export default function IngredientViewItem(props) {
         }
       })
     );
-    // console.log(props.index);
-    // todo.completed ? removeFromList(todo) : markAsComplete(todo);
   }
 
-  // function handleCheckBoxClick(index) {
-  //   setCheckedIngredients([...checkedIngredients, "added"]);
-  //   console.log(checkedIngredients);
-  // }
-
-  useEffect(() => {
-    setEdited(props.ingredient);
-  }, [props.ingredient]);
+  //updates the ingredient value if there has been an edit since last page render
+  useEffect(() => setEdited(props.ingredient), [props.ingredient]);
 
   return (
     <li
+      //update styling if it's been completed on the 'make recipe' component
       className="ingredientViewItem"
       style={
         completed
           ? {
               backgroundColor: "lightgreen",
-              // border: "solid red 3px",
             }
           : {}
       }
     >
+      {/* Adds a checkbox when the recipe is in our recipe book */}
       {props.inMyRecipes && (
         <input
           className="checkbox"
           type="checkbox"
-          // checked="false"
           onClick={(event) => props.handleCheckBoxClick(props.index, event)}
         />
       )}
+
+      {/* If user is editing the ingredient, show an input box, otherwise is a span */}
       {editing ? (
         <input
           className="ingredientName"
@@ -69,6 +60,7 @@ export default function IngredientViewItem(props) {
           }}
         />
       ) : (
+        // Span changes style depending on whether we are in 'view recipe' or 'make recipe'
         <span
           className="ingredientName"
           style={
@@ -83,14 +75,20 @@ export default function IngredientViewItem(props) {
           {edited}
         </span>
       )}
+
+      {/* shows ingredient image if it exists */}
       {props.pic && (
         <img src={`https://${props.pic}`} className="ingredPic"></img>
       )}
+
+      {/* edit button */}
       {props.inMyRecipes && (
         <button onClick={handleClick} className="edit">
           {editing ? "✅" : "✏️"}
         </button>
       )}
+
+      {/* delete button */}
       {props.inMyRecipes && (
         <button
           onClick={() => props.removeIngredient(props.index)}
@@ -100,6 +98,7 @@ export default function IngredientViewItem(props) {
         </button>
       )}
 
+      {/* completed button if in 'make recpe' component */}
       {props.makeRecipe && (
         <button
           onClick={() => setCompleted(!completed)}

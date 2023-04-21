@@ -5,18 +5,27 @@ import Tab from "./Tab";
 import "./RecipesByCategory.css";
 
 export default function RecipesByCategory({ api, myRecipes }) {
-  //   const categories = ["Category 1", "Category 2", "Category 3"];
+  //setup states
   const [categoryList, setCategoryList] = useState([]);
+
   const [active, setActive] = useState([]);
-  const categoryListAddress = api.address + "/list.php?c=list";
+
   const [userSearch, setUserSearch] = useState("");
+
   const [recipesToRender, setRecipesToRender] = useState(undefined);
+
+  //category api address
+  const categoryListAddress = api.address + "/list.php?c=list";
+
+  //searchbar input update
   const handleChange = (event) => setUserSearch(event.target.value);
 
+  //updates the list of recipes whenever the prop is updated
   useEffect(() => {
     setRecipesToRender(myRecipes);
   }, [myRecipes]);
 
+  //deals with user search input
   let recipes;
   if (recipesToRender) {
     if (userSearch) {
@@ -33,6 +42,7 @@ export default function RecipesByCategory({ api, myRecipes }) {
     }
   }
 
+  //uses the api to get the list of categories
   useEffect(() => {
     api
       .fetcher(categoryListAddress)

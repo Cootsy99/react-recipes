@@ -2,16 +2,8 @@ import "./Search.css";
 
 export default function Search(props) {
   return (
-    // userSearch={userSearch} handleChange={handleChange}
-
     <div className="container">
-      {/* <form
-        onSubmit={
-          props.handleSubmit
-            ? props.handleSubmit
-            : (event) => event.preventDefault()
-        }
-      > */}
+      {/* Search bar */}
       <div className="inputContainer">
         <input
           placeholder="Search by recipe name"
@@ -25,6 +17,7 @@ export default function Search(props) {
         ></input>
       </div>
 
+      {/* Search button */}
       {props.wantSearchButton && (
         <div className="buttonContainer">
           <button
@@ -36,9 +29,6 @@ export default function Search(props) {
           </button>
         </div>
       )}
-      {/* </form> */}
     </div>
   );
 }
-
-// type="submit"

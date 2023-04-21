@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 export default function NewStep({ addStep }) {
+  //setup state
   const [newStep, setNewStep] = useState("");
 
+  //handles submit on add new step form
   function handleAddStep(event) {
     event.preventDefault();
     addStep(newStep);

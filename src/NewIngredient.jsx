@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 export default function NewIngredient({ addIngredient }) {
+  //setup state
   const [newIngredient, setNewIngredient] = useState("");
 
+  //handles submit on add new ingredient form
   function handleAddIngredient(event) {
     event.preventDefault();
     addIngredient(newIngredient);
@@ -11,7 +13,6 @@ export default function NewIngredient({ addIngredient }) {
 
   return (
     <>
-      {/* <h2> New To-Do </h2> */}
       <form onSubmit={handleAddIngredient}>
         <input
           value={newIngredient}
@@ -30,7 +31,3 @@ export default function NewIngredient({ addIngredient }) {
     </>
   );
 }
-
-// function addToDo(todo) {
-//   setTodos([...todos, { text: todo, completed: false }]);
-// }

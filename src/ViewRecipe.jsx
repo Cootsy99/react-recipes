@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import RecipeList from "./RecipeList";
 import { useLocation } from "react-router-dom";
 import "./viewRecipe.css";
 import IngredientViewItem from "./IngredientViewItem";
@@ -9,14 +8,14 @@ import NewIngredient from "./NewIngredient";
 import NewStep from "./NewStep";
 
 export default function ViewRecipe(props) {
+  //getting relevant state info using the useLocation hook
   const location = useLocation();
   const recipe = location.state ? location.state.info : null;
 
-  // console.log(recipe);
-
+  //setup page state
   const [inMyRecipes, setInMyRecipes] = useState(false);
-  const [renderedRecipe, setRenderedRecipe] = useState(recipe);
 
+  //updates whether the recipe in question is in our recipe book or not
   useEffect(() => {
     if (props.myRecipes) {
       const ids = props.myRecipes.map((recipe) => recipe.id);
@@ -28,6 +27,7 @@ export default function ViewRecipe(props) {
     }
   }, [props.myRecipes]);
 
+  //function that helps put recipe list in alphabetical order
   function compare(recipe1, recipe2) {
     if (recipe1.name < recipe2.name) {
       return -1;
@@ -39,10 +39,12 @@ export default function ViewRecipe(props) {
   }
 
   /***** INGREDIENTS *****/
+  //setup ingredient related states
   const [ingredientsList, setIngredientsList] = useState(undefined);
   const [ingredientsToRender, setIngredientsToRender] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
 
+  //setup ingredients list initially
   useEffect(() => {
     let ingredients = [];
     for (const ingredient in recipe.ingredients) {
@@ -51,23 +53,24 @@ export default function ViewRecipe(props) {
     setIngredientsList(ingredients);
   }, []);
 
+  //function that deals with the remove ingredient button
   function removeIngredient(index) {
     setIngredientsList(ingredientsList.toSpliced(index, 1));
   }
 
+  //function that deals with a checkbox tick
   function handleIngredCheckBoxClick(index, event) {
     setCheckedIngredients([...checkedIngredients, index]);
   }
 
-  // console.log(props.myIngredients);
+  //function that finds the index of the ingredient and corresponding picture
   function checkForPic(ingredientListItem) {
-    // console.log(ingredientListItem);
-
     return props.myIngredients
       .map((ingredient) => ingredientListItem.includes(ingredient))
       .indexOf(true);
   }
 
+  //Updates the list of ingredient list items that are required to be rendered depending on various changes
   useEffect(() => {
     if (ingredientsList) {
       setIngredientsToRender(
@@ -96,6 +99,7 @@ export default function ViewRecipe(props) {
     }
   }, [ingredientsList, checkedIngredients, inMyRecipes, props.myIngredients]);
 
+  //helps when we need to update the recipe state when relevant so any edits are updated everywhere in the recipe book
   function rerenderRecipeForIngreds() {
     let rerenderedIngredients = {};
     if (ingredientsList) {
@@ -107,10 +111,10 @@ export default function ViewRecipe(props) {
     return rerenderedRecipe;
   }
 
+  //uses the above function to actually update the myrecipe state when there is a change to our ingredients list
   useEffect(() => {
     if (props.myRecipes) {
       const renderedRecipe = rerenderRecipeForIngreds();
-      // console.log(renderedRecipe);
       props.setMyRecipes(
         props.myRecipes.map((recipeItem) => {
           if (recipe["id"] === recipeItem["id"]) {
@@ -123,10 +127,12 @@ export default function ViewRecipe(props) {
     }
   }, [ingredientsList]);
 
+  //deals with the add ingredient button
   function addIngredient(ingredient) {
     setIngredientsList([...ingredientsList, ingredient]);
   }
 
+  //deals with the delete selected ingredients button
   function handleDeleteSelectedIngreds() {
     const itemsToRemove = [...ingredientsList].filter((ingredient, index) =>
       checkedIngredients.some((i) => index === i)
@@ -138,16 +144,18 @@ export default function ViewRecipe(props) {
     );
   }
 
+  //deals with delete all ingredients button
   function handleDeleteAllIngreds() {
     setIngredientsList([]);
   }
 
   /***** METHOD *****/
-
+  //setup method related states
   const [methodList, setMethodList] = useState(undefined);
   const [stepsToRender, setStepsToRender] = useState([]);
   const [checkedSteps, setCheckedSteps] = useState([]);
 
+  //setup method list initially
   useEffect(() => {
     let steps = [];
     for (const step in recipe.method) {
@@ -156,14 +164,17 @@ export default function ViewRecipe(props) {
     setMethodList(steps);
   }, []);
 
+  //function that deals with the remove step button
   function removeStep(index) {
     setMethodList(methodList.toSpliced(index, 1));
   }
 
+  //function that deals with a checkbox tick
   function handleStepCheckBoxClick(index, event) {
     setCheckedSteps([...checkedSteps, index]);
   }
 
+  //Updates the list of step items that are required to be rendered depending on various changes
   useEffect(() => {
     if (methodList) {
       setStepsToRender(
@@ -186,6 +197,7 @@ export default function ViewRecipe(props) {
     }
   }, [methodList, checkedSteps, inMyRecipes]);
 
+  //helps when we need to update the recipe state when relevant so any edits are updated everywhere in the recipe book
   function rerenderRecipeForMethod() {
     let rerenderedMethod = {};
     if (methodList) {
@@ -197,6 +209,7 @@ export default function ViewRecipe(props) {
     return rerenderedRecipe;
   }
 
+  //uses the above function to actually update the myrecipe state when there is a change to our method
   useEffect(() => {
     if (props.myRecipes) {
       const renderedRecipe = rerenderRecipeForMethod();
@@ -213,10 +226,12 @@ export default function ViewRecipe(props) {
     }
   }, [methodList]);
 
+  //deals with the add step button
   function addStep(step) {
     setMethodList([...methodList, step]);
   }
 
+  //deals with the delete selected steps button
   function handleDeleteSelectedSteps() {
     const itemsToRemove = [...methodList].filter((step, index) =>
       checkedSteps.some((i) => index === i)
@@ -224,6 +239,7 @@ export default function ViewRecipe(props) {
     setMethodList(methodList.filter((step) => !itemsToRemove.includes(step)));
   }
 
+  //deals with delete all steps button
   function handleDeleteAllSteps() {
     setMethodList([]);
   }
@@ -238,6 +254,7 @@ export default function ViewRecipe(props) {
         <Link
           className="makeButtonAnchor"
           to="/MakeRecipe"
+          // Passes relevant state info to the make recipe component
           state={
             ingredientsList && methodList && recipe
               ? {
@@ -253,11 +270,7 @@ export default function ViewRecipe(props) {
                   image: undefined,
                   name: undefined,
                   ingredientPics: undefined,
-                } //,
-            // methodList ? { method: methodList } : { method: undefined }) //,
-            // recipe
-            //   ? { image: recipe["image"], name: recipe["name"] }
-            //   : { image: undefined, name: undefined })
+                }
           }
         >
           <button className="makeButton">Make This Recipe</button>
@@ -290,7 +303,6 @@ export default function ViewRecipe(props) {
       </div>
 
       <img className="recipeImage" src={recipe.image} />
-      {/* <img src={"https://www.themealdb.com/images/ingredients/mushrooms.png"} /> */}
       <div className="ingredientsAndMethodContainer">
         <div className="ingredientsContainer">
           <h2 className="ingredientsLabel">Ingredients</h2>

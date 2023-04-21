@@ -13,31 +13,34 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function App() {
+  //Setting up states
   const [myRecipes, setMyRecipes] = useState(undefined);
+
   const [myIngredients, setMyIngredients] = useState([]);
+
   const [ingredientPics, setIngredientPics] = useState({});
+
   const [activeTab, setActiveTab] = useState("Home");
 
-  // console.log(window.location);
   const location = useLocation();
 
-  // console.log(myRecipes.sort(compare));
-  // console.log(window.location);
-
+  // Updates active tab based on url
   useEffect(() => {
     const pageKeywords = ["Category", "All", "Cuisine", "New"];
+
     const currentPage = pageKeywords.filter((keyWord) =>
       window.location.href.includes(keyWord)
     );
+
     window.location.href.slice(-1) === "/"
       ? setActiveTab("Home")
       : setActiveTab(currentPage[0]);
   }, [window.location.href]);
 
-  // console.log(window.location.href.includes("Category"));
-
+  //function that takes the api raw data and converts into usable object
   const apiFetchToRecipeObject = (apiFetch) => {
     let numIngredients = 1;
+
     while (
       apiFetch[`strIngredient${numIngredients}`] &&
       apiFetch[`strIngredient${numIngredients}`].length > 0
@@ -45,23 +48,23 @@ function App() {
       numIngredients++;
     }
     numIngredients--;
+
     let ingredientsAndQuantity = {};
     let ingredientsForPics = [];
+
     for (let i = 0; i < numIngredients; i++) {
-      // console.log(apiFetch[`strIngredient${i + 1}`]);
       ingredientsAndQuantity[`Ingredient ${i + 1}`] = `${
         apiFetch[`strMeasure${i + 1}`]
       } ${apiFetch[`strIngredient${i + 1}`]}`;
+
       ingredientsForPics.push(apiFetch[`strIngredient${i + 1}`]);
     }
-    // console.log("run");
-    // console.log(myIngredients);
-    // setMyIngredients([...myIngredients, "test"]);
-    // console.log(ingredients);
 
     let methodArr = apiFetch.strInstructions.match(/[^\.]+[\.]+/g);
     let steps = {};
+
     methodArr.forEach((step, index) => (steps[`Step ${index + 1}`] = step));
+
     let recipeObject = {
       id: apiFetch.idMeal,
       name: apiFetch.strMeal,
@@ -75,6 +78,7 @@ function App() {
     return recipeObject;
   };
 
+  //useful object that stores info around api
   const api = {
     address: "https://www.themealdb.com/api/json/v1/1",
     fetcher: async function apiFetch(url) {
@@ -88,6 +92,7 @@ function App() {
     ingredientPic: "www.themealdb.com/images/ingredients/",
   };
 
+  //List of recipes fetched upon loading up application
   const initialRecipes = [
     "BBQ Pork Sloppy Joes",
     "Beef Wellington",
@@ -128,6 +133,7 @@ function App() {
     "Vietnamese Grilled Pork",
   ];
 
+  //function that deals with initial API request
   async function initialiser() {
     let fetchedRecipeArr = [];
     for (const recipe of initialRecipes) {
@@ -137,10 +143,12 @@ function App() {
     return fetchedRecipeArr;
   }
 
+  //updates the recipe list state once initial api request is complete
   useEffect(() => {
     initialiser().then((result) => setMyRecipes(result));
   }, []);
 
+  //updates list of ingredients in my recipes and the corresponding urls
   useEffect(() => {
     let ingredientUrls = {};
     let ingredients = [];
@@ -164,6 +172,7 @@ function App() {
     setMyIngredients([...myIngredients, ...ingredients]);
   }, [myRecipes]);
 
+  //setting up router links
   return (
     <div className="App">
       <NavBar activeTab={activeTab} setActiveTab={setActiveTab} />

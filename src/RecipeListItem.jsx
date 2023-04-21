@@ -2,6 +2,7 @@ import "./RecipeListItem.css";
 import "./placeholderPic.jpeg";
 
 export default function RecipeListItem({ recipe }) {
+  //Displays the recipe in question in any recipe list
   return (
     <div className="recipeListItem">
       <img src={recipe.image} />

@@ -2,10 +2,12 @@ import "./MethodViewItem.css";
 import { useEffect, useState } from "react";
 
 export default function MethodViewItem(props) {
+  //setup states
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(props.step);
   const [completed, setCompleted] = useState(false);
 
+  //handles click of edit step button
   function handleClick() {
     setEditing(!editing);
     props.setMethodList(
@@ -19,10 +21,12 @@ export default function MethodViewItem(props) {
     );
   }
 
+  //updates the step value if there has been an edit since last page render
   useEffect(() => setEdited(props.step), [props.step]);
 
   return (
     <li
+      //update styling if it's been completed on the 'make recipe' component
       className="stepViewItem"
       style={
         completed
@@ -33,14 +37,16 @@ export default function MethodViewItem(props) {
           : {}
       }
     >
+      {/* Adds a checkbox when the recipe is in our recipe book */}
       {props.inMyRecipes && (
         <input
           className="checkbox"
           type="checkbox"
-          // checked="false"
           onClick={(event) => props.handleCheckBoxClick(props.index, event)}
         />
       )}
+
+      {/* If user is editing the step, show an input box, otherwise is a span */}
       {editing ? (
         <input
           className="stepName"
@@ -55,6 +61,7 @@ export default function MethodViewItem(props) {
           }}
         />
       ) : (
+        // Span changes style depending on whether we are in 'view recipe' or 'make recipe'
         <span
           className="stepName"
           style={
@@ -71,11 +78,15 @@ export default function MethodViewItem(props) {
           {edited}
         </span>
       )}
+
+      {/* edit button */}
       {props.inMyRecipes && (
         <button onClick={handleClick} className="edit">
           {editing ? "✅" : "✏️"}
         </button>
       )}
+
+      {/* delete button */}
       {props.inMyRecipes && (
         <button
           onClick={() => props.removeStep(props.index)}
@@ -84,6 +95,8 @@ export default function MethodViewItem(props) {
           ❌
         </button>
       )}
+
+      {/* completed button if in 'make recpe' component */}
       {props.makeRecipe && (
         <button
           onClick={() => setCompleted(!completed)}
@@ -99,13 +112,3 @@ export default function MethodViewItem(props) {
     </li>
   );
 }
-
-//   return (
-//     <li className="stepViewItem" style={{ backgroundColor: "hotpink" }}>
-//       <span className="stepName">{props.step}</span>
-//       <button onClick={handleClick} className="edit">
-//         {"✏️"}
-//       </button>
-//     </li>
-//   );
-// }

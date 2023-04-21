@@ -3,29 +3,15 @@ import { Link } from "react-router-dom";
 import RecipeListItem from "./RecipeListItem";
 
 export default function RecipeList(props) {
+  //setup state
   const [recipesToRender, setRecipesToRender] = useState(undefined);
+
+  //Updates recipe list if there are any edits/additions/deletions of myrecipes
   useEffect(() => {
     setRecipesToRender(props.myRecipes);
-    // console.log(props.myRecipes);
   }, [props.myRecipes]);
-  let testRecipes = [
-    {
-      name: "Recipe 1",
-      picture:
-        "/Users/jackcoots/sei/projects/react-recipes/src/placeholderPic.webp",
-      cuisine: "American",
-      category: "Chicken",
-    },
-    {
-      name: "Recipe 2",
-      picture:
-        "/Users/jackcoots/sei/projects/react-recipes/src/placeholderPic.webp",
-      cuisine: "British",
-      category: "Pork",
-    },
-  ];
 
-  //   props.active ? console.log("yes") : console.log("no");
+  //generates the recipes to show, this depends on the active tab in the recipe by cuisine/category section
   let recipes;
   if (recipesToRender) {
     recipes = recipesToRender
@@ -46,5 +32,6 @@ export default function RecipeList(props) {
         );
       });
   }
+
   return <>{recipes}</>;
 }

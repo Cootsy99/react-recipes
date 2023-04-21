@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import RecipeList from "./RecipeList";
 
 export default function Home({ myRecipes }) {
-  //   const [myRecipeList, setMyRecipeList] = useState(myRecipes);
-  //   useEffect(() => {
-  //     console.log(myRecipes);
-  //     setMyRecipeList(myRecipes);
-  //   }, [myRecipes]);
-
   return (
     <>
+      {/* Buttons on homepage */}
       <div className="buttonsContainer">
         <Link to="/AllRecipes">
           <button className="allRecipes navButton">
@@ -42,6 +36,7 @@ export default function Home({ myRecipes }) {
           </button>
         </Link>
       </div>
+      {/* Showing favorite recipes (currently just all recipes) */}
       <div>
         <h1>Favorite Recipes</h1>
         {myRecipes ? (
